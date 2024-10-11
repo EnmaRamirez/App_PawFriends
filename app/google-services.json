@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "537964277206",
+    "project_id": "pawfriends-e9413",
+    "storage_bucket": "pawfriends-e9413.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537964277206:android:987df1dbc395b3d6c68877",
+        "android_client_info": {
+          "package_name": "com.enma.pawfriends"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB-8VGeukJjYMRPZo3i-PYrZTTOop9880"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
