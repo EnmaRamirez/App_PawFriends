@@ -18,6 +18,15 @@
         <activity
             android:name=".login.Login"
             android:exported="true" />
+            android:name=".PantallaPrincipalActivity"
+            android:exported="false"
+            android:label="@string/title_activity_pantalla_principal"
+            android:theme="@style/Theme.PawFriends" />
+        <activity
+            android:name=".ListActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_list2"
+            android:theme="@style/Theme.PawFriends" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

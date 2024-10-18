@@ -70,6 +70,10 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.auth.ktx)
     implementation(libs.androidx.runtime.saved.instance.state)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -78,9 +82,22 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-auth")
     //implementation ("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-analytics-ktx")
+
+
+    //implementation ("com.google.firebase:firebase-firestore")
+
+
+    //implementation 'com.google.firebase:firebase-auth-ktx'
+    //implementation 'com.google.firebase:firebase-firestore-ktx'
+    //implementation 'com.google.firebase:firebase-storage-ktx'
+    //implementation 'com.google.firebase:firebase-messaging-ktx'
+   // implementation 'androix.navigation:navigation-compose:2.7.1'
+
+
 }
