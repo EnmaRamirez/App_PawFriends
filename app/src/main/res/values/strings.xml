@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PawFriends</string>
+    <string name="title_activity_list2">ListActivity2</string>
+    <string name="title_activity_pantalla_principal">PantallaPrincipalActivity</string>
 </resources>
