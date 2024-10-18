@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name" translatable="false">PawFriends</string>
     <string name="app_name">PawFriends</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>

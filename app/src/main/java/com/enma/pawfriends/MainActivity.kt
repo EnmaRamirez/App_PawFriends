@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,46 +36,15 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    val expanded = remember { mutableStateOf(false) }
-    val extraPadding = if (expanded.value) 48.dp else 0.dp
-
-    Surface(
-        color = MaterialTheme.colorScheme.primary,
-        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
-    ) {
-        Row(modifier = Modifier.padding(24.dp)){
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(bottom = extraPadding)
-            ) {
-                Text(text = "Hello ")
-                Text(text = name)
-            }
-            ElevatedButton(
-                onClick = { expanded.value = !expanded.value },
-            ) {
-                Text(if (expanded.value)"Show less" else "Show more")
-            }
-        }
-
-    }
-}
 
 
 @Composable
 fun MyApp(
     modifier: Modifier = Modifier,
     names: List<String> = listOf("World", "Compose")
-) {
-    Column(modifier = modifier.padding(vertical = 4.dp)) {
-        for (name in names) {
-            Greeting(name = name)
-        }
-    }
-}
+) {}
+
+
 
 
 @Preview(showBackground = true, widthDp = 320)

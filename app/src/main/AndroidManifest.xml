@@ -13,6 +13,11 @@
         android:theme="@style/Theme.PawFriends"
         tools:targetApi="31">
         <activity
+            android:name=".login.HomeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".login.Login"
+            android:exported="true" />
             android:name=".ReporteMascotas"
             android:exported="false" />
         <activity
