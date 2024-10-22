@@ -14,8 +14,10 @@ firebaseAuthKtx = "23.0.0"
 navigationRuntimeKtx = "2.8.2"
 firebaseFirestoreKtx = "25.1.0"
 navigationCompose = "2.8.2"
+lifecycleViewmodelKtx = "2.5.1"
 
 [libraries]
+lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorlayout" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-drawerlayout = { module = "androidx.drawerlayout:drawerlayout", version.ref = "drawerlayout" }
