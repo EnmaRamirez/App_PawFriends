@@ -6,24 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,20 +20,29 @@ import androidx.compose.ui.unit.sp
 import com.enma.pawfriends.services.FirestoreService
 import com.enma.pawfriends.ui.screens.PetRegistrationScreen
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
-import kotlin.io.encoding.Base64
 
 class MainActivity : ComponentActivity() {
     private val firestoreService = FirestoreService()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             PawFriendsTheme {
-                Surface(modifier = androidx.compose.ui.Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background){
-                    PetRegistrationScreen(firestoreService = firestoreService, ownerId = "owner123")
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    Column {
+                        PetRegistrationScreen(firestoreService = firestoreService, ownerId = "owner123")
+                        ElevatedButton(
+                            onClick = {
+                                val intent = Intent(this@MainActivity, ReviewActivity::class.java)
+                                startActivity(intent)
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("Ir a Review Activity")
+                        }
+                        Elementos()
+                    }
                 }
-                Elementos()
-
             }
         }
     }
@@ -61,11 +55,10 @@ fun Elementos() {
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-
     ) {
         Image(
             painter = painterResource(id = R.drawable.logitopaw),
-            contentDescription = "Paw Frieds"
+            contentDescription = "Paw Friends"
         )
         Text(
             "Paw Friends",
@@ -73,44 +66,26 @@ fun Elementos() {
             fontSize = 48.sp
         )
         Text("Bienvenido, Usuario")
-        Row() {
-            OutlinedButton(onClick = {/*TODO*/ }) {
+        Row {
+            OutlinedButton(onClick = { /*TODO*/ }) {
                 Text("Tu mascota")
             }
             Spacer(modifier = Modifier.width(10.dp))
             OutlinedButton(
                 onClick = {
                     mContext.startActivity(Intent(mContext, PantallaPrincipalActivity::class.java))
-
                 }
             ) {
                 Text("Contenidos")
             }
         }
     }
-
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ElementosPreview(){
-    PawFriendsTheme{
+fun ElementosPreview() {
+    PawFriendsTheme {
         Elementos()
     }
 }
-
-/*
-@Composable
-fun Greeting(name: String){
-    Text(text = "Hello $name")
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview(){
-    PawFriendsTheme{
-        Greeting("Android")
-    }
-}
-*/

@@ -78,14 +78,6 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
 
 
-    //implementation ("com.google.firebase:firebase-firestore")
-
-
-    //implementation 'com.google.firebase:firebase-auth-ktx'
-    //implementation 'com.google.firebase:firebase-firestore-ktx'
-    //implementation 'com.google.firebase:firebase-storage-ktx'
-    //implementation 'com.google.firebase:firebase-messaging-ktx'
-   // implementation 'androix.navigation:navigation-compose:2.7.1'
 
 
 }
