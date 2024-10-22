@@ -61,10 +61,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.firebase.auth.ktx)
-    implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.firebase.firestore.ktx)
-    implementation(libs.androidx.navigation.compose)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,19 +71,13 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
 
-
-    //implementation ("com.google.firebase:firebase-firestore")
-
-
-    //implementation 'com.google.firebase:firebase-auth-ktx'
-    //implementation 'com.google.firebase:firebase-firestore-ktx'
-    //implementation 'com.google.firebase:firebase-storage-ktx'
-    //implementation 'com.google.firebase:firebase-messaging-ktx'
-   // implementation 'androix.navigation:navigation-compose:2.7.1'
-
+//Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.0")
+    implementation("androidx.compose.ui:ui:1.5.0")
+    implementation("androidx.compose.material3:material3:1.1.0")
+    
 
 }

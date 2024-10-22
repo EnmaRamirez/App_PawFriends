@@ -44,8 +44,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PawFriendsTheme {
-                Surface(modifier = androidx.compose.ui.Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background){
-                    PetRegistrationScreen(firestoreService = firestoreService, ownerId = "owner123")
+                Surface(modifier = androidx.compose.ui.Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                 }
                 Elementos()
 

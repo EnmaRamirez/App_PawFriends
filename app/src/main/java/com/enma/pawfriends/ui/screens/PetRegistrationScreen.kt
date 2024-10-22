@@ -23,31 +23,48 @@ fun PetRegistrationScreen (firestoreService: FirestoreService, ownerId: String){
     var petName by remember { mutableStateOf("") }
     var petBreed by remember { mutableStateOf("") }
     var petAge by remember { mutableStateOf(0) }
+    var pethealth by remember { mutableStateOf("") }
+    var petcarnet by remember { mutableStateOf(0) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)){
         TextField(
             value = petName,
             onValueChange = { petName = it },
-            label = { Text("Pet Name") },
+            label = { Text("Nombre de mascota") },
             modifier = Modifier.fillMaxWidth()
         )
         TextField(
             value = petBreed,
             onValueChange = {petBreed = it },
-            label = { Text("Pet Breed") },
+            label = { Text("Raza de mascota") },
             modifier = Modifier.fillMaxWidth()
 
         )
         TextField(
             value = petAge.toString(),
             onValueChange = { petAge = it.toIntOrNull() ?: 0},
-            label = { Text("Pet Age") },
+            label = { Text("Edad ") },
             modifier = Modifier.fillMaxWidth()
         )
+
+        TextField(
+            value = pethealth,
+            onValueChange = { pethealth = it },
+            label = { Text("Salud ") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        TextField(
+            value = petcarnet.toString(),
+            onValueChange = { petcarnet = it.toIntOrNull() ?: 0},
+            label = { Text("Carnet") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
         Button(
             onClick = {
-                val pet = Pet(name = petName, breed = petBreed, age = petAge, ownerId = ownerId)
+                val pet = Pet(name = petName, breed = petBreed, age = petAge, health = pethealth, carnet = petcarnet, ownerId = ownerId)
                 firestoreService.savePet(pet, onSuccess = {
 
                 }, onFailure = { errorMessage = it.message })
