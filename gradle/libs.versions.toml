@@ -17,7 +17,6 @@ constraintlayout = "2.1.4"
 firebaseAuthKtx = "23.0.0"
 runtimeSavedInstanceState = "1.0.0-alpha11"
 firebaseAuth = "23.0.0"
-firebaseAuthKtx = "23.0.0"
 firebaseFirestoreKtx = "25.1.0"
 navigationCompose = "2.8.2"
 
@@ -45,7 +44,6 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 androidx-runtime-saved-instance-state = { group = "androidx.compose.runtime", name = "runtime-saved-instance-state", version.ref = "runtimeSavedInstanceState" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
-androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 

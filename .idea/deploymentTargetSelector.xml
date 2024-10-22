@@ -27,7 +27,10 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="PantallaPrincipalPreview2">
+      <SelectionState runConfigName="PantallaPrincipalActivity">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="MainActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
