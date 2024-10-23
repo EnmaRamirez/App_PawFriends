@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -32,10 +31,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.enma.pawfriends.navigation.NavManager
 import com.enma.pawfriends.services.FirestoreService
-import com.enma.pawfriends.ui.screens.PetRegistrationScreen
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
-import kotlin.io.encoding.Base64
+
 
 class MainActivity : ComponentActivity() {
     private val firestoreService = FirestoreService()
@@ -44,7 +43,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PawFriendsTheme {
-                Surface(modifier = androidx.compose.ui.Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                Surface(modifier = androidx.compose.ui.Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background){
                 }
                 Elementos()
 
