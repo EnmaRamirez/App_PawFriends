@@ -1,4 +1,4 @@
-package com.enma.pawfriends.pantallaprincipal
+package com.enma.pawfriends
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -29,9 +29,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
-import com.enma.pawfriends.viewmodel.NotesViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import com.enma.pawfriends.Destinos.*
@@ -43,14 +45,15 @@ class PantallaPrincipalActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PawFriendsTheme {
+                PantallaPrincipal()
             }
         }
     }
 }
+
 @Composable
-fun PantallaPrincipal(navController: NavController,
-                      viewModel: NotesViewModel
-) {
+fun PantallaPrincipal() {
+    val navController = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed) // Controlamos el estado del drawer
     val scope = rememberCoroutineScope()
 
@@ -206,8 +209,6 @@ fun currentRoute(navController: NavController): String?{
 @Composable
 fun PantallaPrincipalPreview2() {
     PawFriendsTheme {
+        PantallaPrincipal()
     }
 }
-
-
-
