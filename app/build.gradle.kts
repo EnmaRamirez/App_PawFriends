@@ -59,8 +59,6 @@ android {
 dependencies {
 
     val nav_version = "2.8.0"
-
-    //Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
     implementation(libs.androidx.core.ktx)
@@ -103,11 +101,25 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
 
-//Navigation
+//NAVIGATION FIREBASE
     implementation("androidx.navigation:navigation-compose:2.7.0")
     implementation("androidx.compose.ui:ui:1.5.0")
     implementation("androidx.compose.material3:material3:1.1.0")
+
+    //Dependencias DE COMPOSE
+    implementation(platform(libs.androidx.compose.bom))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material-icons-core:1.3.0")
+    implementation("androidx.compose.material:material-icons-extended:1.3.0")
+    implementation ("androidx.compose.material3:material3:1.3.0")
+
+
+   
     
 
 }

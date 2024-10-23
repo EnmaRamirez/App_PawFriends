@@ -5,6 +5,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 
+
+//ESTA FUNCION NOS AYUDA A CONTROLAR LA PANTALLA QUE SI YA INIAMOS CECION NOS DIRIJA A LA PANTALLA HOME
 @Composable
 fun BlanckView(navController: NavController){
     LaunchedEffect(Unit) {

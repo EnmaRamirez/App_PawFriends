@@ -19,8 +19,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.enma.pawfriends.viewmodel.LoginViewModel
 
+
 @Composable
-fun TabsView(innerPadding: PaddingValues = PaddingValues(top = 40.dp),
+fun TabsView(innerPadding: PaddingValues  = PaddingValues(top = 40.dp),
              navController: NavController,
              loginViewModel: LoginViewModel
 ){
@@ -33,8 +34,7 @@ fun TabsView(innerPadding: PaddingValues = PaddingValues(top = 40.dp),
             containerColor = Color.White,
 
             indicator = {
-                    tabPositions ->
-                TabRowDefaults.Indicator(
+                    tabPositions ->TabRowDefaults.Indicator(
                 modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTab])
             )
             }) {
@@ -54,3 +54,4 @@ fun TabsView(innerPadding: PaddingValues = PaddingValues(top = 40.dp),
         }
     }
 }
+
