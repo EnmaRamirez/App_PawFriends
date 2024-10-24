@@ -4,9 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,6 +30,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -34,13 +40,19 @@ import androidx.compose.ui.unit.sp
 import com.enma.pawfriends.navigation.NavManager
 import com.enma.pawfriends.services.FirestoreService
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
+import com.enma.pawfriends.viewmodel.LoginViewModel
+import com.enma.pawfriends.viewmodel.NotesViewModel
 
 
 class MainActivity : ComponentActivity() {
     private val firestoreService = FirestoreService()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        val loginViewModel: LoginViewModel by viewModels()
+        val notesViewModel: NotesViewModel by viewModels()
         setContent {
             PawFriendsTheme {
                 Surface(modifier = androidx.compose.ui.Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background){
@@ -61,16 +73,29 @@ fun Elementos() {
         verticalArrangement = Arrangement.Center
 
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.logitopaw),
-            contentDescription = "Paw Frieds"
-        )
+        Box (
+            modifier = Modifier
+                .clip(shape = MaterialTheme.shapes.small)
+                .background(MaterialTheme.colorScheme.secondary)
+                .border(2.dp, MaterialTheme.colorScheme.primary)
+        ){
+            Image(
+                painter = painterResource(id = R.drawable.logitopaw),
+                contentDescription = "Paw Frieds",
+                modifier = Modifier
+                    .padding(20.dp)
+            )
+        }
+
         Text(
             "Paw Friends",
-            color = Color.Blue,
-            fontSize = 48.sp
+            color = MaterialTheme.colorScheme.primaryContainer,
+            style = MaterialTheme.typography.bodyMedium
         )
-        Text("Bienvenido, Usuario")
+        Text("Bienvenido, Usuario",
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.bodySmall
+        )
         Row() {
             OutlinedButton(onClick = {/*TODO*/ }) {
                 Text("Tu mascota")
@@ -82,7 +107,7 @@ fun Elementos() {
 
                 }
             ) {
-                Text("Contenidos")
+                Text("Inicia sesion")
             }
         }
     }

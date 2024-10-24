@@ -1,4 +1,5 @@
 package com.enma.pawfriends.model
+//Registro de mascotas
 
 data class Pet (
     val name: String = "",
