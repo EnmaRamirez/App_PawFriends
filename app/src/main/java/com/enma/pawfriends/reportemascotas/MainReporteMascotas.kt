@@ -1,4 +1,6 @@
-package com.enma.pawfriends
+/*package com.enma.pawfriends
+
+-------ESTE ES EL MAIN QUE EJECUTA ESTA VENTANA DE LA APP------
 
 import MainScreen
 import android.os.Bundle
@@ -25,4 +27,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
+} */
