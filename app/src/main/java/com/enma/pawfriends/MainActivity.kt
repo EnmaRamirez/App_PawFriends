@@ -1,87 +1,117 @@
 package com.enma.pawfriends
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.enma.pawfriends.ui.theme.PawFriendsTheme
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.navigation.compose.rememberNavController
+import com.enma.pawfriends.ui1.MessagingScreen
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        // Solicitar permiso de notificación si es Android 13 o superior
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    1
+                )
+            }
+        }
         setContent {
-            PawFriendsTheme {
-                MyApp(modifier = Modifier.fillMaxSize())
+            AppNavigation()
+        }
+    }
 
+    @Composable
+    fun AppNavigation() {
+        val auth = FirebaseAuth.getInstance()
+        var isAuthenticated by remember { mutableStateOf(auth.currentUser != null) }
+
+        if (isAuthenticated) {
+            // Si el usuario está autenticado, muestra la pantalla de perfil
+            ProfileScreen()
+        } else {
+            // Si el usuario no está autenticado, muestra la pantalla de autenticación
+            AuthScreen(onAuthSuccess = {
+                isAuthenticated = true
+            })
+        }
+    }
+
+    @Composable
+    fun ProfileScreen() {
+
+        val context = LocalContext.current
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Button(
+                onClick = {
+                    val intent = Intent(context, MessagingActivity::class.java)
+                    context.startActivity(intent)
+                },
+                modifier = Modifier.padding(top = 16.dp)
+            ) {
+                Text(text = "Ir a Mensajería")
             }
         }
     }
 }
-
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    val expanded = remember { mutableStateOf(false) }
-    val extraPadding = if (expanded.value) 48.dp else 0.dp
-
-    Surface(
-        color = MaterialTheme.colorScheme.primary,
-        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+fun AuthScreen(onAuthSuccess: () -> Unit) {
+    // Implementación básica de la pantalla de autenticación
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
     ) {
-        Row(modifier = Modifier.padding(24.dp)){
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(bottom = extraPadding)
-            ) {
-                Text(text = "Hello ")
-                Text(text = name)
-            }
-            ElevatedButton(
-                onClick = { expanded.value = !expanded.value },
-            ) {
-                Text(if (expanded.value)"Show less" else "Show more")
-            }
-        }
-
-    }
-}
-
-
-@Composable
-fun MyApp(
-    modifier: Modifier = Modifier,
-    names: List<String> = listOf("World", "Compose")
-) {
-    Column(modifier = modifier.padding(vertical = 4.dp)) {
-        for (name in names) {
-            Greeting(name = name)
+        Button(onClick = {
+            // Aquí iría la lógica de autenticación
+            onAuthSuccess()
+        }) {
+            Text(text = "Iniciar sesión")
         }
     }
 }
 
-
-@Preview(showBackground = true, widthDp = 320)
-@Composable
-fun GreetingPreview() {
-    PawFriendsTheme {
-        MyApp()
-
-    }
+class MessagingActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MessagingScreen(navController = rememberNavController())
+            }
+        }
 }
+
+
+
+
+
+
+
+
