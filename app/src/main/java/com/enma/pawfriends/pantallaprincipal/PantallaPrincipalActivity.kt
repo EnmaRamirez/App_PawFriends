@@ -12,29 +12,19 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
 import com.enma.pawfriends.viewmodel.NotesViewModel
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class PantallaPrincipalActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            PawFriendsTheme {
-            }
-        }
-    }
-}
 @Composable
-fun PantallaPrincipal(navController: NavController,
-                      viewModel: NotesViewModel
-) {
+fun PantallaPrincipal(navController: NavController) {
     val drawerState = rememberDrawerState(DrawerValue.Closed) // Controlamos el estado del drawer
     val scope = rememberCoroutineScope()
 

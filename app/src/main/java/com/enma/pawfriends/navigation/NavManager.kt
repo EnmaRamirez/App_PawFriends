@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.enma.pawfriends.pantallaprincipal.Elementos
 import com.enma.pawfriends.pantallaprincipal.PantallaPrincipal
 import com.enma.pawfriends.view.login.BlanckView
 import com.enma.pawfriends.view.login.TabsView
@@ -23,7 +24,10 @@ fun NavManager(loginViewModel: LoginViewModel,
             TabsView(navController = navController, loginViewModel = loginViewModel)
         }
         composable("home") {
-            PantallaPrincipal(navController = navController, viewModel = notesViewModel)
+            Elementos(navController = navController)
+        }
+        composable("pantalla_principal") {
+            PantallaPrincipal(navController = navController)
         }
     }
 }
