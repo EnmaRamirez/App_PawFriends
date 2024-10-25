@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.enma.pawfriends.viewmodel.MessagingViewModel
-import com.google.firebase.messaging.RemoteMessage.Notification
+
 
 @Composable
 fun NotificationUtils(navController: NavController, viewModel: MessagingViewModel = viewModel()) {
