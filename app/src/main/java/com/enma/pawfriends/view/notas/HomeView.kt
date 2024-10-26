@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Bookmarks
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.Pets
 import androidx.compose.material.icons.filled.TipsAndUpdates
 import androidx.compose.material3.BottomAppBar
@@ -68,8 +69,12 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
 
                 // Menú lateral con opciones aqui llamo todas mis funciones
                 val menuItems = listOf(
-                    DrawerMenuItem("Registro de Mascotas", Icons.Default.Pets, "register_pet")
+                    DrawerMenuItem("Registro de Mascotas", Icons.Default.Pets, "register_pet"),
+                    DrawerMenuItem("Reporte de mascotas pedidas y encontradas", Icons.Default.People,"pet_reports")
+
                 )
+
+
 
                 menuItems.forEach { item ->
                     NavigationDrawerItem(
