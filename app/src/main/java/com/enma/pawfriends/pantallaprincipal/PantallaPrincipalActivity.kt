@@ -1,4 +1,4 @@
-package com.enma.pawfriends
+package com.enma.pawfriends.pantallaprincipal
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

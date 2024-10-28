@@ -37,7 +37,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.enma.pawfriends.navigation.NavManager
+import com.enma.pawfriends.pantallaprincipal.PantallaPrincipalActivity
 import com.enma.pawfriends.services.FirestoreService
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
 import com.enma.pawfriends.viewmodel.LoginViewModel
@@ -57,7 +59,7 @@ class MainActivity : ComponentActivity() {
             PawFriendsTheme {
                 Surface(modifier = androidx.compose.ui.Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background){
                 }
-                Elementos()
+                NavManager(loginViewModel, notesViewModel)
 
             }
         }
@@ -65,7 +67,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Elementos() {
+fun Elementos(navController: NavController) {
     val mContext = LocalContext.current
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -103,7 +105,7 @@ fun Elementos() {
             Spacer(modifier = Modifier.width(10.dp))
             OutlinedButton(
                 onClick = {
-                    mContext.startActivity(Intent(mContext, PantallaPrincipalActivity::class.java))
+                    navController.navigate("login")
 
                 }
             ) {
@@ -118,7 +120,7 @@ fun Elementos() {
 @Composable
 fun ElementosPreview(){
     PawFriendsTheme{
-        Elementos()
+       // Elementos()
     }
 }
 

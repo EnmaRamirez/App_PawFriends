@@ -10,12 +10,20 @@ import com.enma.pawfriends.view.login.TabsView
 import com.enma.pawfriends.view.notas.HomeView
 import com.enma.pawfriends.viewmodel.LoginViewModel
 import com.enma.pawfriends.viewmodel.NotesViewModel
+import androidx.navigation.NavController
+import com.enma.pawfriends.Elementos
 
 @Composable
 fun NavManager(loginViewModel: LoginViewModel,
                notesViewModel: NotesViewModel){
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "black"){
+
+    val petReportRepository = PetReportRepository()
+
+    NavHost(navController = navController, startDestination = "elementos"){
+        composable("elementos") {
+            Elementos(navController)
+        }
         composable("black") {
             BlanckView(navController = navController)
         }

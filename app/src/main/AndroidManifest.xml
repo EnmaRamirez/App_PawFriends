@@ -20,8 +20,8 @@
             android:theme="@style/Theme.PawFriends" />
 
         <activity
-            android:name=".PantallaPrincipalActivity"
-            android:exported="false"
+            android:name=".pantallaprincipal.PantallaPrincipalActivity"
+            android:exported="true"
             android:label="@string/title_activity_pantalla_principal"
             android:theme="@style/Theme.PawFriends" />
 
