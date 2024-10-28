@@ -5,43 +5,55 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.enma.pawfriends.navigation.NavManager
 import com.enma.pawfriends.services.FirestoreService
-import com.enma.pawfriends.ui.screens.PetRegistrationScreen
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
+import com.enma.pawfriends.viewmodel.LoginViewModel
+import com.enma.pawfriends.viewmodel.NotesViewModel
+
 
 class MainActivity : ComponentActivity() {
     private val firestoreService = FirestoreService()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val loginViewModel: LoginViewModel by viewModels()
+        val notesViewModel: NotesViewModel by viewModels()
         setContent {
             PawFriendsTheme {
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Column {
-                        PetRegistrationScreen(firestoreService = firestoreService, ownerId = "owner123")
-                        ElevatedButton(
-                            onClick = {
-                                val intent = Intent(this@MainActivity, ReviewActivity::class.java)
-                                startActivity(intent)
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text("Ir a Review Activity")
-                        }
-                        Elementos()
-                    }
+                Surface(modifier = androidx.compose.ui.Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background){
                 }
             }
         }
@@ -56,18 +68,31 @@ fun Elementos() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.logitopaw),
-            contentDescription = "Paw Friends"
-        )
+        Box (
+            modifier = Modifier
+                .clip(shape = MaterialTheme.shapes.small)
+                .background(MaterialTheme.colorScheme.secondary)
+                .border(2.dp, MaterialTheme.colorScheme.primary)
+        ){
+            Image(
+                painter = painterResource(id = R.drawable.logitopaw),
+                contentDescription = "Paw Frieds",
+                modifier = Modifier
+                    .padding(20.dp)
+            )
+        }
+
         Text(
             "Paw Friends",
-            color = Color.Blue,
-            fontSize = 48.sp
+            color = MaterialTheme.colorScheme.primaryContainer,
+            style = MaterialTheme.typography.bodyMedium
         )
-        Text("Bienvenido, Usuario")
-        Row {
-            OutlinedButton(onClick = { /*TODO*/ }) {
+        Text("Bienvenido, Usuario",
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.bodySmall
+        )
+        Row() {
+            OutlinedButton(onClick = {/*TODO*/ }) {
                 Text("Tu mascota")
             }
             Spacer(modifier = Modifier.width(10.dp))
@@ -76,7 +101,7 @@ fun Elementos() {
                     mContext.startActivity(Intent(mContext, PantallaPrincipalActivity::class.java))
                 }
             ) {
-                Text("Contenidos")
+                Text("Inicia sesion")
             }
         }
     }
