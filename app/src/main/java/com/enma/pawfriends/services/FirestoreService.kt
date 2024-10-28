@@ -8,7 +8,7 @@ class FirestoreService {
     private val db = FirebaseFirestore.getInstance()
 
     fun savePet(pet: Pet, onSuccess: () -> Unit, onFailure: (Exception) -> Unit){
-        db.collection("pets").add(pet)
+        db.collection("Register_pets").add(pet)
             .addOnSuccessListener { onSuccess() }
             .addOnFailureListener{e -> onFailure(e)}
     }
