@@ -26,6 +26,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -55,6 +57,8 @@ class MainActivity : ComponentActivity() {
             PawFriendsTheme {
                 Surface(modifier = androidx.compose.ui.Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background){
                 }
+                Elementos()
+
             }
         }
     }
@@ -67,6 +71,7 @@ fun Elementos() {
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
+
     ) {
         Box (
             modifier = Modifier
@@ -99,18 +104,36 @@ fun Elementos() {
             OutlinedButton(
                 onClick = {
                     mContext.startActivity(Intent(mContext, PantallaPrincipalActivity::class.java))
+
                 }
             ) {
                 Text("Inicia sesion")
             }
         }
     }
+
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ElementosPreview() {
-    PawFriendsTheme {
+fun ElementosPreview(){
+    PawFriendsTheme{
         Elementos()
     }
 }
+
+/*
+@Composable
+fun Greeting(name: String){
+    Text(text = "Hello $name")
+
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview(){
+    PawFriendsTheme{
+        Greeting("Android")
+    }
+}
+*/
