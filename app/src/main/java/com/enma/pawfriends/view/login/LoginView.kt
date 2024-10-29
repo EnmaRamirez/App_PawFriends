@@ -24,7 +24,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.enma.pawfriends.components.Alert
-import com.enma.pawfriends.viewmodel.LoginViewModel
+import com.enma.pawfriends.repuesto.viewmodel.LoginViewModel
 
 @Composable
 fun LoginView(navController: NavController, loginViewModel: LoginViewModel){

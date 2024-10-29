@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.enma.pawfriends.R
-import com.enma.pawfriends.viewmodel.NotesViewModel
+import com.enma.pawfriends.repuesto.viewmodel.NotesViewModel
 
 @Composable
 fun Elementos(navController: NavController

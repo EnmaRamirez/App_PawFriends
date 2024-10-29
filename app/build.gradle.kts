@@ -55,7 +55,6 @@ dependencies {
 
     implementation(kotlin("script-runtime"))
     val nav_version = "2.8.0"
-    val nav_version = "2.8.0"
 
     //Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:$nav_version")
@@ -68,7 +67,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.storage)
     implementation(libs.androidx.ui.test.android)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.espresso.core)
@@ -122,9 +120,7 @@ dependencies {
 
 
    
-    
 
-}
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-analytics-ktx")

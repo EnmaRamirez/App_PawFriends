@@ -10,8 +10,8 @@ import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
 import com.enma.pawfriends.navigation.NavManager
-import com.enma.pawfriends.viewmodel.LoginViewModel
-import com.enma.pawfriends.viewmodel.NotesViewModel
+import com.enma.pawfriends.repuesto.viewmodel.LoginViewModel
+import com.enma.pawfriends.repuesto.viewmodel.NotesViewModel
 
 class PantallaPrincipalActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
