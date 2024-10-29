@@ -1,10 +1,9 @@
-package com.enma.pawfriends.reportemascotas
-
 data class PetReport(
-    val id: String, // UUID o timestamp para identificar el reporte
+    val id: String,
     val name: String,
-    val type: String, // Perdida o Encontrada
+    val type: String,
     val description: String,
     val location: String,
-    val date: String, // Fecha del reporte
+    val date: String,
+    val userName: String // Campo para el nombre del usuario
 )

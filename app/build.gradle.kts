@@ -53,6 +53,7 @@ android {
 
 dependencies {
 
+    implementation(libs.firebase.messaging.ktx)
     val nav_version = "2.8.0"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
@@ -98,5 +99,8 @@ dependencies {
     implementation("androidx.compose.material:material-icons-core:1.3.0")
     implementation("androidx.compose.material:material-icons-extended:1.3.0")
     implementation ("androidx.compose.material3:material3:1.3.0")
+
+    //LIBRERIAS PARA RECIBIR NOTIFICACIONES
+    implementation (libs.google.firebase.messaging.ktx)
 
 }

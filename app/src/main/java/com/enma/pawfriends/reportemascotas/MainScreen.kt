@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.enma.pawfriends.reportemascotas.PetReportRepository
-import com.enma.pawfriends.reportemascotas.PetReportsScreen
+
 
 @Composable
 fun MainScreen(navController: NavHostController, repository: PetReportRepository) {
