@@ -1,6 +1,7 @@
+// PetReport.kt
 package com.enma.pawfriends.ReporteMascotas
-//Llamado al reporte de mascotas
 
+// Llamado al reporte de mascotas
 data class PetReport(
     val id: String, // UUID o timestamp para identificar el reporte
     val name: String,
@@ -8,5 +9,5 @@ data class PetReport(
     val description: String,
     val location: String,
     val date: String, // Fecha del reporte
+    val userId: String // ID del usuario que reportó la mascota
 )
-

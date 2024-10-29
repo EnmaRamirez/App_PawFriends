@@ -10,8 +10,8 @@ import com.enma.pawfriends.view.login.TabsView
 import com.enma.pawfriends.view.notas.HomeView
 import com.enma.pawfriends.viewmodel.LoginViewModel
 import com.enma.pawfriends.viewmodel.NotesViewModel
-import androidx.navigation.NavController
-import com.enma.pawfriends.Elementos
+import com.enma.pawfriends.ReporteMascotas.PetReportRepository
+import com.enma.pawfriends.pantallaprincipal.Elementos
 
 @Composable
 fun NavManager(loginViewModel: LoginViewModel,
