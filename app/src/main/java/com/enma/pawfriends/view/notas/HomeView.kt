@@ -3,17 +3,22 @@ package com.enma.pawfriends.view.notas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmarks
+//import androidx.compose.material.icons.filled.CrueltyFree
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.People
+import androidx.compose.material.icons.filled.Message
 import androidx.compose.material.icons.filled.Pets
+//import androidx.compose.material.icons.filled.People
+//import androidx.compose.material.icons.filled.Pets
 import androidx.compose.material.icons.filled.TipsAndUpdates
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.DrawerValue
@@ -69,8 +74,9 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
 
                 // Menú lateral con opciones aqui llamo todas mis funciones
                 val menuItems = listOf(
-                    DrawerMenuItem("Registro de Mascotas", Icons.Default.Pets, "register_pet"),
-                    DrawerMenuItem("Reporte de mascotas pedidas y encontradas", Icons.Default.People,"pet_reports")
+                    DrawerMenuItem("Registro de Mascotas", icon = painterResource(id = R.drawable.registrosmascotas), route = "register_pet"),
+                    DrawerMenuItem("Reporte de mascotas pedidas y encontradas", icon = painterResource(id = R.drawable.reporte), route = "pet_reports"),
+                    DrawerMenuItem("Consejos de cuidados y recursos veterinarios", icon = painterResource(id = R.drawable.saludveterinario), "pantalla_inicial")
 
                 )
 
@@ -79,7 +85,7 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                 menuItems.forEach { item ->
                     NavigationDrawerItem(
                         label = { Text(item.title) },
-                        icon = { Icon(imageVector = item.icon, contentDescription = item.title) },
+                        icon = { Image(painter = item.icon, contentDescription = item.title, modifier = Modifier.size(40.dp)) },
                         selected = false,
                         onClick = {
                             navController.navigate(item.route)
@@ -121,15 +127,25 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = Color.White,
 
-                    actions = {
-                        IconButton(onClick = {"Feed"}) {
-                            Icon(imageVector = Icons.Default.Home, contentDescription = "Registro de Mascotas" )
+                ){
+                    Row (
+                        modifier = Modifier.fillMaxWidth()
+                    ){
+                        IconButton(onClick = {navController.navigate("inicio")},
+                            modifier = Modifier.weight(1f)) {
+                            Icon(imageVector = Icons.Default.Home, contentDescription = "Inicio", modifier = Modifier.size(30.dp) )
                         }
-                        IconButton(onClick = {"Buscar" }) {
-                            Icon(imageVector = Icons.Default.Bookmarks, contentDescription = "Otra accion")
+                        IconButton(onClick = {navController.navigate("consejos")},
+                            modifier = Modifier.weight(1f)) {
+                            Icon(imageVector = Icons.Default.Pets, contentDescription = "Consejos", modifier = Modifier.size(30.dp))
+                        }
+                        IconButton(onClick = {navController.navigate("mensajeria") },
+                            modifier = Modifier.weight(1f)) {
+                            Icon(imageVector = Icons.Default.Message, contentDescription = "Mensajeria", modifier = Modifier.size(30.dp))
                         }
                     }
-                )
+
+                }
             }
         ) { innerPadding ->
             Box(modifier = Modifier
@@ -144,14 +160,14 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                 ){
                     Text(text = "Home")
                     //Aqui puedo agregar mas contenido a mi vista principal
-                }
+                }//Funcion 6
                 FloatingActionButton(
-                    onClick = {"Consejos"},
+                    onClick = {navController.navigate("servicios")},
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .padding(20.dp)
                 ) {
-                    Icon(imageVector = Icons.Default.TipsAndUpdates, contentDescription =  "Añadir")
+                    Icon(imageVector = Icons.Default.TipsAndUpdates, contentDescription =  "Servicios")
                 }
             }
         }
