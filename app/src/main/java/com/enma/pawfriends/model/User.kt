@@ -1,5 +1,7 @@
 package com.enma.pawfriends.model
 
+//Login
+
 data class User(
     val email: String,
     val userId: String,
@@ -13,4 +15,3 @@ data class User(
         )
     }
 }
-

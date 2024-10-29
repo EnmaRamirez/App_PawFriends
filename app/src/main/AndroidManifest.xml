@@ -17,6 +17,7 @@
             android:exported="true"
             android:label="@string/title_activity_pantalla_principal"
             android:theme="@style/Theme.PawFriends" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

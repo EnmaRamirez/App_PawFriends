@@ -119,7 +119,7 @@ fun Elementos(navController: NavController) {
 @Composable
 fun ElementosPreview(){
     PawFriendsTheme{
-        // Elementos()
+       // Elementos()
     }
 }
 

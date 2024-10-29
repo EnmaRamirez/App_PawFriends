@@ -18,6 +18,7 @@ fun RegisterPetScreen(navController: NavController) {
     var petHealth by remember { mutableStateOf("") }
     var petCarnet by remember { mutableStateOf(0) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
+    var successMessage by remember { mutableStateOf<String?>(null) }
 
     val firestoreService = FirestoreService()
 
@@ -70,6 +71,7 @@ fun RegisterPetScreen(navController: NavController) {
             onClick = {
                 val pet = Pet(name = petName, breed = petBreed, age = petAge, health = petHealth, carnet = petCarnet, ownerId = "someOwnerId")
                 firestoreService.savePet(pet, onSuccess = {
+                    successMessage = "Mascota registrada con éxito"
                     // Acciones en caso de éxito
                     navController.popBackStack() // Regresar a la pantalla anterior
                 }, onFailure = { errorMessage = it.message })
@@ -82,6 +84,10 @@ fun RegisterPetScreen(navController: NavController) {
         errorMessage?.let {
             Spacer(modifier = Modifier.height(8.dp))
             Text(it, color = MaterialTheme.colorScheme.error)
+        }
+        successMessage?.let {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(it, color = MaterialTheme.colorScheme.primary)
         }
     }
 }

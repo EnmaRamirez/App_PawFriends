@@ -1,4 +1,4 @@
-package com.enma.pawfriends.petregister
+package com.enma.pawfriends.pantallaprincipal
 
 import android.content.Intent
 import androidx.compose.foundation.Image
@@ -18,11 +18,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.enma.pawfriends.PantallaPrincipalActivity
+import androidx.navigation.NavController
 import com.enma.pawfriends.R
+import com.enma.pawfriends.viewmodel.NotesViewModel
 
 @Composable
-fun Elementos() {
+fun Elementos(navController: NavController
+) {
     val mContext = LocalContext.current
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -47,7 +49,7 @@ fun Elementos() {
             Spacer(modifier = Modifier.width(10.dp))
             OutlinedButton(
                 onClick = {
-                    mContext.startActivity(Intent(mContext, PantallaPrincipalActivity::class.java))
+                    navController.navigate("pantalla_principal")
 
                 }
             ) {
