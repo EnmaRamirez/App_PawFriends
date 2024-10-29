@@ -39,7 +39,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.enma.pawfriends.navigation.NavManager
-import com.enma.pawfriends.pantallaprincipal.PantallaPrincipalActivity
 import com.enma.pawfriends.services.FirestoreService
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
 import com.enma.pawfriends.viewmodel.LoginViewModel
