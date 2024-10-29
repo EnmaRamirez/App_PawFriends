@@ -4,7 +4,7 @@ sealed class Destinos (
     val icon : Int,
     val title : String,
     val ruta : String
-)/*{
+){
     object Pantalla1: Destinos(R.drawable.registrosmascotas, "Registro y gestión de mascotas", "Pantalla1")
     object Pantalla2: Destinos(R.drawable.reporte, "Reporte de mascotas perdidas y encontradas", "Pantalla2")
     object Pantalla3: Destinos(R.drawable.adopcion, "Adopciones de mascotas", "Pantalla3")
@@ -15,7 +15,5 @@ sealed class Destinos (
     object Pantalla8: Destinos(R.drawable.calificaciones, "Calificación y reseñas", "Pantalla8")
     object Pantalla9: Destinos(R.drawable.recompensas, "Recompensas y reconocimientos", "Pantalla9")
 
-
-
 }
-*/
+

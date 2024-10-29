@@ -4,24 +4,30 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.enma.pawfriends.pantallaprincipal.Elementos
-import com.enma.pawfriends.pantallaprincipal.PantallaPrincipal
-import com.enma.pawfriends.view.login.BlanckView
-import com.enma.pawfriends.view.login.TabsView
+import com.enma.pawfriends.ReporteMascotas.PetReportRepository
+import com.enma.pawfriends.ReporteMascotas.PetReportViewModel
+import com.enma.pawfriends.ReporteMascotas.PetReportsScreen
+import com.enma.pawfriends.ReporteMascotas.ReportPetScreen
 import com.enma.pawfriends.view.login.BlanckView
 import com.enma.pawfriends.view.login.RegisterPetScreen
 import com.enma.pawfriends.view.login.TabsView
 import com.enma.pawfriends.view.notas.HomeView
-import com.enma.pawfriends.repuesto.viewmodel.LoginViewModel
-import com.enma.pawfriends.repuesto.viewmodel.NotesViewModel
+import com.enma.pawfriends.viewmodel.LoginViewModel
+import com.enma.pawfriends.viewmodel.NotesViewModel
+import androidx.navigation.NavController
+import com.enma.pawfriends.Elementos
 
 @Composable
 fun NavManager(loginViewModel: LoginViewModel,
-               notesViewModel: NotesViewModel
-){
                notesViewModel: NotesViewModel){
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "black"){
+
+    val petReportRepository = PetReportRepository()
+
+    NavHost(navController = navController, startDestination = "elementos"){
+        composable("elementos") {
+            Elementos(navController)
+        }
         composable("black") {
             BlanckView(navController = navController)
         }
@@ -29,18 +35,23 @@ fun NavManager(loginViewModel: LoginViewModel,
             TabsView(navController = navController, loginViewModel = loginViewModel)
         }
         composable("home") {
-            Elementos(navController = navController)
-        }
-        composable("pantalla_principal") {
-            PantallaPrincipal(navController = navController)
-        }
-    }
-}
             HomeView(navController = navController, viewModel = notesViewModel)
         }
         composable("register_pet"){
             RegisterPetScreen(navController = navController)
         }
+        composable("pet_reports") { // Ruta para la pantalla de reporte de mascotas
+            ReportPetScreen(
+                onReportSubmitted = { /* Acción a realizar después de reportar */ },
+                repository = petReportRepository,
+                onViewReports = { navController.navigate("petReports") } // Navega a la pantalla de reportes
+            )
+        }
+        composable("petReports") {
+            PetReportsScreen(navController = navController, repository = petReportRepository)
+        }
+
+
     }
 }
 
