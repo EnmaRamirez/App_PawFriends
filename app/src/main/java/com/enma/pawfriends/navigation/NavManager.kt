@@ -10,16 +10,14 @@ import com.enma.pawfriends.ReporteMascotas.PetReportsScreen
 import com.enma.pawfriends.ReporteMascotas.ReportPetScreen
 import com.enma.pawfriends.view.login.BlanckView
 import com.enma.pawfriends.view.login.RegisterPetScreen
-import com.enma.pawfriends.view.login.TabsView
-import com.enma.pawfriends.view.notas.HomeView
-import com.enma.pawfriends.viewmodel.LoginViewModel
-import com.enma.pawfriends.viewmodel.NotesViewModel
-import androidx.navigation.NavController
 import com.enma.pawfriends.Elementos
+import com.enma.pawfriends.repuesto.viewmodel.LoginViewModel
+import com.enma.pawfriends.repuesto.viewmodel.NotesViewModel
 
 @Composable
 fun NavManager(loginViewModel: LoginViewModel,
-               notesViewModel: NotesViewModel){
+               notesViewModel: NotesViewModel
+){
     val navController = rememberNavController()
 
     val petReportRepository = PetReportRepository()

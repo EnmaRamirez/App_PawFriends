@@ -7,12 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.enma.pawfriends.ui.theme.PawFriendsTheme
 import com.enma.pawfriends.navigation.NavManager
-import com.enma.pawfriends.view.login.LoginView
-import com.enma.pawfriends.view.notas.HomeView
+import com.enma.pawfriends.ui.theme.PawFriendsTheme
 import com.enma.pawfriends.viewmodel.LoginViewModel
 import com.enma.pawfriends.viewmodel.NotesViewModel
 
