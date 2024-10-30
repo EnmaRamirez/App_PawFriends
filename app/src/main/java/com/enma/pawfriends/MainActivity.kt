@@ -32,8 +32,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,11 +39,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.enma.pawfriends.navigation.NavManager
-import com.enma.pawfriends.pantallaprincipal.PantallaPrincipalActivity
-import com.enma.pawfriends.repuesto.viewmodel.LoginViewModel
-import com.enma.pawfriends.repuesto.viewmodel.NotesViewModel
 import com.enma.pawfriends.services.FirestoreService
-import
+import com.enma.pawfriends.ui.theme.PawFriendsTheme
+import com.enma.pawfriends.viewmodel.LoginViewModel
+import com.enma.pawfriends.viewmodel.NotesViewModel
+
 
 class MainActivity : ComponentActivity() {
     private val firestoreService = FirestoreService()
@@ -65,10 +63,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-class PawFriendsTheme(function: @Composable () -> Unit) {
-
 }
 
 @Composable
@@ -125,7 +119,7 @@ fun Elementos(navController: NavController) {
 @Composable
 fun ElementosPreview(){
     PawFriendsTheme{
-        // Elementos()
+       // Elementos()
     }
 }
 
