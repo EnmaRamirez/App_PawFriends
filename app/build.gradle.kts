@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.enma.pawfriends"
-        minSdk = 25
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -54,6 +54,7 @@ android {
 dependencies {
 
     implementation(libs.firebase.messaging.ktx)
+    implementation(libs.firebase.storage.ktx)
     val nav_version = "2.8.0"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
@@ -103,7 +104,7 @@ dependencies {
     //LIBRERIAS PARA RECIBIR NOTIFICACIONES
     implementation (libs.google.firebase.messaging.ktx)
 
-   
-    
+
+
 
 }

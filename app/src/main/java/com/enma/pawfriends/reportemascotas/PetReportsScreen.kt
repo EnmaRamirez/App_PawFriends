@@ -1,4 +1,4 @@
-package com.enma.pawfriends.ReporteMascotas
+package com.enma.pawfriends.reportemascotas
 
 import androidx.compose.foundation.layout.* // Import para la UI
 import androidx.compose.foundation.lazy.LazyColumn

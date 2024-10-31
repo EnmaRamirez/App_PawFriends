@@ -1,4 +1,4 @@
-package com.enma.pawfriends.cosejosdecuidado
+package com.enma.pawfriends.reportemascotas.cosejosdecuidado
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

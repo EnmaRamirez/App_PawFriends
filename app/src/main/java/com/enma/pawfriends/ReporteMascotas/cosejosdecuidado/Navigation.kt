@@ -1,4 +1,4 @@
-package com.enma.pawfriends.cosejosdecuidado
+package com.enma.pawfriends.reportemascotas.cosejosdecuidado
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost

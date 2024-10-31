@@ -1,6 +1,5 @@
-package com.enma.pawfriends.ReporteMascotas
+package com.enma.pawfriends.reportemascotas
 
-import androidx.navigation.NavController
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 

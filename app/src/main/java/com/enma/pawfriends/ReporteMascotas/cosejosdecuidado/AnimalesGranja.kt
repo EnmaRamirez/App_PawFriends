@@ -1,4 +1,4 @@
-package com.enma.pawfriends.cosejosdecuidado
+package com.enma.pawfriends.reportemascotas.cosejosdecuidado
 
 import android.content.Intent
 import android.net.Uri
@@ -29,21 +29,19 @@ import androidx.navigation.NavController
 import com.enma.pawfriends.R
 
 @Composable
-fun AnimalesDomesticos(navController: NavController) {
+fun AnimalesGranja(navController: NavController) {
     // Lista de mascotas, incluyendo la imagen, el texto del AlertDialog y el enlace al video
-    val mascotas = listOf(
-        Triple("Perros", R.drawable.perro, "https://youtu.be/TbgB5zH8_3E?si=yjghY6a_JmBiKkl2"),
-        Triple("Gatos", R.drawable.gato, "https://youtu.be/gXRCjKd4jIs?si=s63m_T2eLodfl8sG"),
-        Triple("Aves", R.drawable.ave, "https://youtu.be/CFK4inlsfO4?si=RlMDf-pr6nAeeqQN"),
-        Triple("Roedores", R.drawable.roedor, "https://youtu.be/aoPggCxDsxY?si=Q_-bCEi57NesV_85")
+    val granja = listOf(
+        Triple("Gallinas", R.drawable.gallina, "https://youtu.be/xyybHnk5UT8?si=xCZcFOwtW3t60gZn"),
+        Triple("Vacas", R.drawable.vaca, "https://youtu.be/Wfz23z0Wyq4?si=3BUJx3_WDy9lAPRb"),
+        Triple("Cabras", R.drawable.cabra, "https://youtu.be/qWThipHOjyk?si=d397kpbs8ry3iiyr"),
     )
 
     // Textos específicos para cada animal
     val recomendacionesTextos = mapOf(
-        "Perros" to "Cuidar a un perro implica compromiso y atención. En general, es importante procurar una alimentación saludable...",
-        "Gatos" to "Los gatos son animales independientes, pero requieren de cuidados como buena alimentación, higiene y visitas regulares al veterinario...",
-        "Aves" to "Las aves necesitan un ambiente seguro y saludable. Es importante mantener sus jaulas limpias y darles una dieta equilibrada...",
-        "Roedores" to "Los roedores requieren jaulas limpias, una dieta equilibrada y un entorno seguro. Es importante proporcionarles juguetes para roer..."
+        "Gallinas" to "Si no quieres que tus gallinas enfermen, es imprescindible desparasitarlas interna y externamente de forma periódica.Se recomienda desparasitar al menos dos veces al año, en primavera y otoño, como medida preventiva...",
+        "Vacas" to "Los cuidados del ganado deben ser realizados por un profesional de la salud animal, un veterinario especializado en ganadería es la mejor alternativa. De igual manera la aplicación de medicamentos...",
+        "Cabras" to "Cuando se manipule a las cabras en los espacios pecuarios es preciso ser sumamente gentil y apacible. Las cabras requieren de un recinto techado y no un simple cobertizo como refugio. También es positivo que sus recintos tengan...",
     )
 
     val context = LocalContext.current
@@ -52,7 +50,7 @@ fun AnimalesDomesticos(navController: NavController) {
     var selectedAnimal by remember { mutableStateOf<String?>(null) }
 
     LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        items(mascotas) { (mascota, imageResId, videoUrl) ->
+        items(granja) { (mascota, imageResId, videoUrl) ->
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(bottom = 16.dp)

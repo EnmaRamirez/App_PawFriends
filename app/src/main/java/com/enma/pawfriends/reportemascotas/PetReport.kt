@@ -1,4 +1,4 @@
-package com.enma.pawfriends.ReporteMascotas
+package com.enma.pawfriends.reportemascotas
 //Llamado al reporte de mascotas
 
 data class PetReport(

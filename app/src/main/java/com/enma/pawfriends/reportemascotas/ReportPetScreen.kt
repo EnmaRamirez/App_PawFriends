@@ -1,4 +1,4 @@
-package com.enma.pawfriends.ReporteMascotas
+package com.enma.pawfriends.reportemascotas
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
