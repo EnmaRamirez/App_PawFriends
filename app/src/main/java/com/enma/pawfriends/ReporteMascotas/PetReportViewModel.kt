@@ -1,7 +1,9 @@
-package com.enma.pawfriends.ReporteMascotas
+package com.enma.pawfriends.reportemascotas
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.enma.pawfriends.reportemascotas.PetReport
+import com.enma.pawfriends.reportemascotas.PetReportRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

@@ -1,12 +1,11 @@
-package com.enma.pawfriends.ReporteMascotas
-//Llamado al reporte de mascotas
+package com.enma.pawfriends.reportemascotas
 
 data class PetReport(
-    val id: String, // UUID o timestamp para identificar el reporte
+    val id: String,
     val name: String,
-    val type: String, // Perdida o Encontrada
+    val type: String,
     val description: String,
     val location: String,
-    val date: String, // Fecha del reporte
+    val date: String,
+    val imageUrl: String? = null // Nueva propiedad para la URL de la imagen
 )
-
