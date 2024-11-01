@@ -1,11 +1,11 @@
-package com.enma.pawfriends.reportemascotas
+package com.enma.pawfriends.ReporteMascotas
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MainScreen(navController: NavHostController = rememberNavController(), repository: PetReportRepository) {
@@ -13,28 +13,25 @@ fun MainScreen(navController: NavHostController = rememberNavController(), repos
         navController = navController,
         startDestination = "report_pet"
     ) {
+        // Pantalla para reportar una mascota
         composable("report_pet") {
             ReportPetScreen(
-                onReportSubmitted = { /* Acción al reportar una mascota */ },
+                onReportSubmitted = { /* Acción que sucederá al reportar una mascota */ },
                 repository = repository,
                 onViewReports = { navController.navigate("pet_reports") }
             )
         }
 
+        // Pantalla que muestra los reportes de mascotas
         composable("pet_reports") {
-            PetReportsScreen(repository = repository)
+            PetReportsScreen(repository = repository) // No es necesario el navController aquí
         }
     }
-}
-
-// Mock para el repositorio en la vista previa
-class MockPetReportRepository : PetReportRepository() {
-    // Implementa métodos simulados si es necesario
 }
 
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
-    val repository = MockPetReportRepository() // Usar el mock aquí
+    val repository = PetReportRepository() // Asegúrate de que el repositorio esté correctamente inicializado
     MainScreen(repository = repository)
 }
