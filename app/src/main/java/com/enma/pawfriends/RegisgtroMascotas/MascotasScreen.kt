@@ -1,4 +1,4 @@
-package com.enma.pawfriends.RegisgtroMascotas
+/*package com.enma.pawfriends.RegisgtroMascotas
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -88,4 +88,4 @@ fun MascotasScreen(firestoreService: FirestoreService) { // Cambiado a Firestore
             }
         }
     }
-}
+}*/

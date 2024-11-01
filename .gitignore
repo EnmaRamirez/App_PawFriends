@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+app/src/main/java/com/enma/pawfriends/ReporteMascotas/ReportPetScreen.kt
+app/src/main/java/com/enma/pawfriends/ReporteMascotas/PetReportRepository.kt
+app/src/main/java/com/enma/pawfriends/ReporteMascotas/PetReport.kt
+app/src/main/java/com/enma/pawfriends/ReporteMascotas/MainScreen.kt

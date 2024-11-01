@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.firebase.storage.ktx)
 
     // Navegación con Jetpack Compose
     val nav_version = "2.8.0"
@@ -79,6 +80,8 @@ dependencies {
     // Material Icons para Jetpack Compose
     implementation("androidx.compose.material:material-icons-core:1.3.0")
     implementation("androidx.compose.material:material-icons-extended:1.3.0")
+
+
 
     // Test
     testImplementation(libs.junit)
