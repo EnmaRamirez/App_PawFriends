@@ -1,5 +1,4 @@
 plugins {
-    //id("com.android.application")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
@@ -52,21 +51,36 @@ android {
 }
 
 dependencies {
+    // Firebase Platform: Usar BOM para gestionar versiones automáticamente
+    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation ("com.google.firebase:firebase-messaging-ktx:23.0.0")
 
-    implementation(libs.firebase.messaging.ktx)
-    val nav_version = "2.8.0"
-    implementation("androidx.navigation:navigation-compose:$nav_version")
 
+    // Core de Android y Jetpack
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+
+    // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.firebase.firestore.ktx)
-    implementation(libs.firebase.auth.ktx)
+
+    // Navegación con Jetpack Compose
+    val nav_version = "2.8.0"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    // Material Icons para Jetpack Compose
+    implementation("androidx.compose.material:material-icons-core:1.3.0")
+    implementation("androidx.compose.material:material-icons-extended:1.3.0")
+
+    // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -74,30 +88,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
-    implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-firestore-ktx")
-    implementation("com.google.firebase:firebase-auth-ktx")
-
-//NAVIGATION FIREBASE
-    implementation("androidx.navigation:navigation-compose:2.7.0")
-    implementation("androidx.compose.ui:ui:1.5.0")
-    implementation("androidx.compose.material3:material3:1.1.0")
-
-    //Dependencias DE COMPOSE
-    implementation(platform(libs.androidx.compose.bom))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material:material-icons-core:1.3.0")
-    implementation("androidx.compose.material:material-icons-extended:1.3.0")
-    implementation ("androidx.compose.material3:material3:1.3.0")
-
-
-   
-    
-
 }

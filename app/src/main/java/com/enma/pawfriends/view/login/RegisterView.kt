@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.InputTransformation.Companion.keyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -26,25 +25,26 @@ import com.enma.pawfriends.components.Alert
 import com.enma.pawfriends.viewmodel.LoginViewModel
 
 @Composable
-fun RegisterView(navController: NavController, loginViewModel: LoginViewModel){
-    Column (horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()){
+fun RegisterView(navController: NavController, loginViewModel: LoginViewModel) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize()
+    ) {
         var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
         var userName by remember { mutableStateOf("") }
 
         OutlinedTextField(
             value = userName,
-            onValueChange = {userName = it},
+            onValueChange = { userName = it },
             label = { Text("Nombre") },
-
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 30.dp, end = 30.dp)
         )
         OutlinedTextField(
             value = email,
-            onValueChange = {email= it},
+            onValueChange = { email = it },
             label = { Text("Email") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             modifier = Modifier
@@ -54,7 +54,7 @@ fun RegisterView(navController: NavController, loginViewModel: LoginViewModel){
 
         OutlinedTextField(
             value = password,
-            onValueChange = {password= it},
+            onValueChange = { password = it },
             label = { Text("Password") },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -64,21 +64,27 @@ fun RegisterView(navController: NavController, loginViewModel: LoginViewModel){
         )
         Spacer(modifier = Modifier.height(20.dp))
         Button(
-            onClick = {loginViewModel.register(email = email, password = password, userName = userName){
-                navController.navigate("home")
-            } },
+            onClick = {
+                loginViewModel.register(
+                    email = email,
+                    password = password,
+                    userName = userName
+                ) {
+                    navController.navigate("home")
+                }
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 30.dp, end = 30.dp)
         ) {
-            Text( "Registrar")
+            Text("Registrar")
         }
-        if (loginViewModel.showAlert){
-            Alert(title = "Alerta",
+        if (loginViewModel.showAlert) {
+            Alert(
+                title = "Alerta",
                 message = "Error al registrarse",
                 confirm = "Aceptar",
-                onConfirm = {loginViewModel.closeAlert()}) { }
+                onConfirm = { loginViewModel.closeAlert() }) { }
         }
     }
-
 }

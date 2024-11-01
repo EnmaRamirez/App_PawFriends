@@ -12,24 +12,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.launch
 
 @Composable
-fun PetReportsScreen(repository: PetReportRepository) {
-    var petReports by remember { mutableStateOf<List<PetReport>>(emptyList()) } // Lista para almacenar los reportes
-    var isLoading by remember { mutableStateOf(true) } // Estado de carga
-    var errorMessage by remember { mutableStateOf<String?>(null) } // Estado para mensajes de error
+fun PetReportsScreen(navController: NavController, repository: PetReportRepository) {
+    var petReports by remember { mutableStateOf<List<PetReport>>(emptyList()) }
+    var isLoading by remember { mutableStateOf(true) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
     val db = FirebaseFirestore.getInstance()
     val coroutineScope = rememberCoroutineScope()
 
-    // Lanzamos una corrutina para obtener los datos
     LaunchedEffect(Unit) {
         coroutineScope.launch {
             try {
-                petReports = repository.getPetReports() // Llamada al repositorio para obtener los datos
+                petReports = repository.getPetReports()
             } catch (e: Exception) {
                 errorMessage = "Error al cargar los reportes. Por favor, inténtalo de nuevo."
             } finally {
@@ -41,34 +41,37 @@ fun PetReportsScreen(repository: PetReportRepository) {
     Box(modifier = Modifier.fillMaxSize()) {
         when {
             isLoading -> {
-                // Mostrar un indicador de carga mientras los datos se obtienen
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
             errorMessage != null -> {
-                // Mostrar mensaje de error si lo hay
                 Text(text = errorMessage!!, color = Color.Red, modifier = Modifier.align(Alignment.Center))
             }
             else -> {
-                // Mostrar los datos en una LazyColumn
                 LazyColumn(modifier = Modifier.padding(16.dp)) {
                     items(petReports) { report ->
                         PetReportItemCard(report = report, onFoundClick = {
-                            FirebaseMessaging.getInstance().subscribeToTopic("pet_${report.id}")
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        val notificationTitle = "Mascota Encontrada"
-                                        val notificationMessage = "La mascota ${report.name} ha sido encontrada."
+                            coroutineScope.launch {
+                                try {
+                                    FirebaseMessaging.getInstance().subscribeToTopic("pet_${report.id}")
+                                        .addOnCompleteListener { task ->
+                                            if (task.isSuccessful) {
+                                                val notificationTitle = "Mascota Encontrada"
+                                                val notificationMessage = "La mascota ${report.name} ha sido encontrada."
 
-                                        val data = hashMapOf(
-                                            "to" to "/topics/pet_${report.id}",
-                                            "notification" to hashMapOf(
-                                                "title" to notificationTitle,
-                                                "body" to notificationMessage
-                                            )
-                                        )
-                                        db.collection("notifications").add(data)
-                                    }
+                                                val data = hashMapOf(
+                                                    "to" to "/topics/pet_${report.id}",
+                                                    "notification" to hashMapOf(
+                                                        "title" to notificationTitle,
+                                                        "body" to notificationMessage
+                                                    )
+                                                )
+                                                db.collection("notifications").add(data)
+                                            }
+                                        }
+                                } catch (e: Exception) {
+                                    // Manejar error al enviar la notificación
                                 }
+                            }
                         })
                     }
                 }
@@ -80,31 +83,30 @@ fun PetReportsScreen(repository: PetReportRepository) {
 @Composable
 fun PetReportItemCard(report: PetReport, onFoundClick: () -> Unit) {
     val db = FirebaseFirestore.getInstance()
-    var userName by remember { mutableStateOf("Cargando...") }
-    val coroutineScope = rememberCoroutineScope()
+    var userEmail by remember { mutableStateOf("Cargando...") }
 
-    // Utilizando LaunchedEffect para cargar el nombre del usuario desde Firebase
-    LaunchedEffect(report.userId) {
-        coroutineScope.launch {
-            userName = try {
-                val document = db.collection("users").document(report.userId).get().await()
-                document.getString("name") ?: "Desconocido"
-            } catch (e: Exception) {
-                "Desconocido"
+    LaunchedEffect(report.ownerId) {
+        try {
+            if (report.ownerId.isNotEmpty()) {
+                val document = db.collection("users").document(report.ownerId).get().await()
+                userEmail = document.getString("email") ?: "Desconocido"
+            } else {
+                userEmail = "Desconocido"
             }
+        } catch (e: Exception) {
+            userEmail = "Desconocido"
         }
     }
 
     Column(modifier = Modifier.padding(8.dp)) {
-        Text("Nombre del usuario: $userName") // Mostrar el nombre del usuario
+        Text("Reportado por: $userEmail")
         Text("Nombre de la mascota: ${report.name}")
-        Text("Tipo: ${report.type}") // Perdido o Encontrado
+        Text("Tipo: ${report.type}")
         Text("Descripción: ${report.description}")
         Text("Ubicación: ${report.location}")
         Text("Última fecha vista: ${report.date}")
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Botón para marcar la mascota como encontrada
         Button(
             onClick = { onFoundClick() },
             modifier = Modifier.fillMaxWidth(),

@@ -130,6 +130,7 @@ fun ReportPetScreen(
                         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                         try {
                             dateFormat.parse(lastSeenDate) // Validar la fecha
+                            val userId = repository.auth.currentUser?.uid ?: "usuario_placeholder"
                             val petReport = PetReport(
                                 id = System.currentTimeMillis().toString(),
                                 name = petName,
@@ -137,7 +138,7 @@ fun ReportPetScreen(
                                 description = petDescription,
                                 location = petLocation,
                                 date = lastSeenDate,
-                                userId = "usuario_placeholder" // Aquí se debe reemplazar con el ID del usuario autenticado
+                                ownerId = userId // Aquí se debe reemplazar con el ID del usuario autenticado
                             )
                             repository.reportPet(petReport)
                             message = "Mascota reportada exitosamente."
