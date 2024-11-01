@@ -17,3 +17,5 @@ app/src/main/java/com/enma/pawfriends/ReporteMascotas/ReportPetScreen.kt
 app/src/main/java/com/enma/pawfriends/ReporteMascotas/PetReportRepository.kt
 app/src/main/java/com/enma/pawfriends/ReporteMascotas/PetReport.kt
 app/src/main/java/com/enma/pawfriends/ReporteMascotas/MainScreen.kt
+app/src/main/java/com/enma/pawfriends/ReporteMascotas/PetListScreen.kt
+app/src/main/java/com/enma/pawfriends/ReporteMascotas/PetReportsScreen.kt
