@@ -1,5 +1,6 @@
 package com.enma.pawfriends.view.notas
 
+import android.util.Log // Importación correcta para utilizar Log.e()
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -43,7 +44,8 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                     DrawerMenuItem("Registro de Mascotas", icon = painterResource(id = R.drawable.registrosmascotas), route = "register_pet"),
                     DrawerMenuItem("Reporte de Mascotas Perdidas y Encontradas", icon = painterResource(id = R.drawable.reporte), route = "pet_reports"),
                     DrawerMenuItem("Consejos de Cuidados y Recursos Veterinarios", icon = painterResource(id = R.drawable.saludveterinario), route = "pantalla_inicial"),
-                    DrawerMenuItem("Clasificación", icon = painterResource(id = R.drawable.ic_leaderboard), route = "leaderboard")
+                    DrawerMenuItem("Clasificación", icon = painterResource(id = R.drawable.ic_leaderboard), route = "leaderboard"),
+                    DrawerMenuItem("Calificaciones y Reseñas", icon = painterResource(id = R.drawable.ic_reviews), route = "review_screen") // Agregar sistema de reseñas
                 )
 
                 menuItems.forEach { item ->
@@ -52,8 +54,16 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                         icon = { Image(painter = item.icon, contentDescription = item.title, modifier = Modifier.size(40.dp)) },
                         selected = false,
                         onClick = {
-                            navController.navigate(item.route)
-                            scope.launch { drawerState.close() }
+                            try {
+                                navController.navigate(item.route) {
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                                scope.launch { drawerState.close() }
+                            } catch (e: Exception) {
+                                // Manejar error de navegación
+                                Log.e("NavigationError", "Error al navegar a la ruta: ${item.route}", e)
+                            }
                         },
                         modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
                     )
@@ -73,16 +83,19 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                     actions = {
                         IconButton(onClick = {
                             viewModel.signOut()
-                            navController.navigate("login") // Navegar a la pantalla de login al cerrar sesión
+                            navController.navigate("login") {
+                                popUpTo("login") { inclusive = true }
+                            } // Navegar a la pantalla de login al cerrar sesión
                         }) {
                             Icon(imageVector = Icons.Default.ExitToApp, contentDescription = "Cerrar Sesión")
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primary, // Cambia por el color que quieras
-                        titleContentColor = MaterialTheme.colorScheme.onPrimary // Color del título
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        titleContentColor = MaterialTheme.colorScheme.onPrimary
                     )
                 )
+
             },
             // Barra inferior
             bottomBar = {
@@ -94,19 +107,34 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         IconButton(
-                            onClick = { navController.navigate("inicio") },
+                            onClick = {
+                                navController.navigate("inicio") {
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            },
                             modifier = Modifier.weight(1f)
                         ) {
                             Icon(imageVector = Icons.Default.Home, contentDescription = "Inicio", modifier = Modifier.size(30.dp))
                         }
                         IconButton(
-                            onClick = { navController.navigate("consejos") },
+                            onClick = {
+                                navController.navigate("consejos") {
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            },
                             modifier = Modifier.weight(1f)
                         ) {
                             Icon(imageVector = Icons.Default.Pets, contentDescription = "Consejos", modifier = Modifier.size(30.dp))
                         }
                         IconButton(
-                            onClick = { navController.navigate("mensajeria") },
+                            onClick = {
+                                navController.navigate("mensajeria") {
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            },
                             modifier = Modifier.weight(1f)
                         ) {
                             Icon(imageVector = Icons.Default.Message, contentDescription = "Mensajería", modifier = Modifier.size(30.dp))

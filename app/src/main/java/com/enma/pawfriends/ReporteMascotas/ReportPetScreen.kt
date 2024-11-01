@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun ReportPetScreen(
@@ -31,6 +32,7 @@ fun ReportPetScreen(
     var lastSeenDate by remember { mutableStateOf("") }
     var message by remember { mutableStateOf("") } // Estado para el mensaje
     val coroutineScope = rememberCoroutineScope()
+    val auth = FirebaseAuth.getInstance() // Obtener instancia de FirebaseAuth
 
     Column(
         modifier = Modifier
@@ -130,7 +132,7 @@ fun ReportPetScreen(
                         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                         try {
                             dateFormat.parse(lastSeenDate) // Validar la fecha
-                            val userId = repository.auth.currentUser?.uid ?: "usuario_placeholder"
+                            val userId = auth.currentUser?.uid ?: "usuario_placeholder"
                             val petReport = PetReport(
                                 id = System.currentTimeMillis().toString(),
                                 name = petName,

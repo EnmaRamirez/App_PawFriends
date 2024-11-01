@@ -8,15 +8,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.enma.pawfriends.model.Pet
-import com.enma.pawfriends.services.FirestoreService
 
 @Composable
 fun RegisterPetScreen(navController: NavController) {
     var petName by remember { mutableStateOf("") }
     var petBreed by remember { mutableStateOf("") }
-    var petAge by remember { mutableStateOf(0) }
+    var petAge by remember { mutableStateOf("") }
     var petHealth by remember { mutableStateOf("") }
-    var petCarnet by remember { mutableStateOf(0) }
+    var petCarnet by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     var successMessage by remember { mutableStateOf<String?>(null) }
 
@@ -32,6 +31,7 @@ fun RegisterPetScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Nombre de la mascota
         TextField(
             value = petName,
             onValueChange = { petName = it },
@@ -39,6 +39,9 @@ fun RegisterPetScreen(navController: NavController) {
             modifier = Modifier.fillMaxWidth()
         )
 
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Raza de la mascota
         TextField(
             value = petBreed,
             onValueChange = { petBreed = it },
@@ -46,13 +49,19 @@ fun RegisterPetScreen(navController: NavController) {
             modifier = Modifier.fillMaxWidth()
         )
 
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Edad de la mascota (como texto para permitir edición)
         TextField(
-            value = petAge.toString(),
-            onValueChange = { petAge = it.toIntOrNull() ?: 0 },
+            value = petAge,
+            onValueChange = { petAge = it },
             label = { Text("Edad") },
             modifier = Modifier.fillMaxWidth()
         )
 
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Salud de la mascota
         TextField(
             value = petHealth,
             onValueChange = { petHealth = it },
@@ -60,31 +69,55 @@ fun RegisterPetScreen(navController: NavController) {
             modifier = Modifier.fillMaxWidth()
         )
 
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Número de carnet (como texto para permitir edición)
         TextField(
-            value = petCarnet.toString(),
-            onValueChange = { petCarnet = it.toIntOrNull() ?: 0 },
+            value = petCarnet,
+            onValueChange = { petCarnet = it },
             label = { Text("Carnet") },
             modifier = Modifier.fillMaxWidth()
         )
 
+        Spacer(modifier = Modifier.height(16.dp))
+
         Button(
             onClick = {
-                val pet = Pet(name = petName, breed = petBreed, age = petAge, health = petHealth, carnet = petCarnet, ownerId = "someOwnerId")
+                val age = petAge.toIntOrNull()
+                val carnet = petCarnet.toIntOrNull()
+
+                // Validación de entradas
+                if (petName.isBlank() || petBreed.isBlank() || petAge.isBlank() || petHealth.isBlank() || petCarnet.isBlank()) {
+                    errorMessage = "Todos los campos son obligatorios."
+                    return@Button
+                }
+                if (age == null || carnet == null) {
+                    errorMessage = "Edad y Carnet deben ser números válidos."
+                    return@Button
+                }
+
+                val pet = Pet(name = petName, breed = petBreed, age = age, health = petHealth, carnet = carnet, ownerId = "someOwnerId")
                 firestoreService.savePet(pet, onSuccess = {
                     successMessage = "Mascota registrada con éxito"
-                    // Acciones en caso de éxito
+                    errorMessage = null
                     navController.popBackStack() // Regresar a la pantalla anterior
-                }, onFailure = { errorMessage = it.message })
+                }, onFailure = { exception ->
+                    errorMessage = exception.message
+                    successMessage = null
+                })
             },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Registrar Mascota")
         }
 
+        // Mostrar mensaje de error
         errorMessage?.let {
             Spacer(modifier = Modifier.height(8.dp))
             Text(it, color = MaterialTheme.colorScheme.error)
         }
+
+        // Mostrar mensaje de éxito
         successMessage?.let {
             Spacer(modifier = Modifier.height(8.dp))
             Text(it, color = MaterialTheme.colorScheme.primary)

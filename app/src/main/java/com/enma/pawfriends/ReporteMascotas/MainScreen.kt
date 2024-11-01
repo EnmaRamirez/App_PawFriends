@@ -24,7 +24,7 @@ fun MainScreen(navController: NavHostController = rememberNavController(), repos
 
         // Pantalla que muestra los reportes de mascotas
         composable("pet_reports") {
-            PetReportsScreen(repository = repository) // No es necesario el navController aquí
+            PetReportsScreen(navController = navController, repository = repository) // Agregar navController para navegación
         }
     }
 }

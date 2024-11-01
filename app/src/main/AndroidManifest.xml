@@ -5,10 +5,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
+        android:name=".PawFriendsApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -24,7 +26,7 @@
             android:name=".notifications.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
@@ -34,12 +36,14 @@
             android:exported="true"
             android:theme="@style/Theme.PawFriends" />
 
+        <!-- Definición de PantallaPrincipalActivity -->
         <activity
             android:name=".pantallaprincipal.PantallaPrincipalActivity"
             android:exported="true"
             android:label="@string/title_activity_pantalla_principal"
             android:theme="@style/Theme.PawFriends" />
 
+        <!-- MainActivity: Actividad principal -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -47,7 +51,6 @@
             android:theme="@style/Theme.PawFriends">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
