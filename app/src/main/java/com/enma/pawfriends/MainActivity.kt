@@ -43,6 +43,7 @@ import com.enma.pawfriends.services.FirestoreService
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
 import com.enma.pawfriends.viewmodel.LoginViewModel
 import com.enma.pawfriends.viewmodel.NotesViewModel
+import com.google.firebase.FirebaseApp
 
 
 class MainActivity : ComponentActivity() {
@@ -51,6 +52,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         enableEdgeToEdge()
         val loginViewModel: LoginViewModel by viewModels()
         val notesViewModel: NotesViewModel by viewModels()

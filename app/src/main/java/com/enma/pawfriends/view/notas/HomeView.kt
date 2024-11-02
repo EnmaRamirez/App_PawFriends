@@ -10,17 +10,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Bookmarks
-//import androidx.compose.material.icons.filled.CrueltyFree
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Message
 import androidx.compose.material.icons.filled.Pets
-//import androidx.compose.material.icons.filled.People
-//import androidx.compose.material.icons.filled.Pets
 import androidx.compose.material.icons.filled.TipsAndUpdates
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -37,15 +34,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ControlledComposition
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.enma.pawfriends.R
 import com.enma.pawfriends.model.DrawerMenuItem
@@ -64,11 +58,11 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
         drawerContent = {
             ModalDrawerSheet {
                 Image(
-                    painter = painterResource(id = R.drawable.imagenlateral), // Cambia esto por el nombre de tu imagen
+                    painter = painterResource(id = R.drawable.imagenlateral),
                     contentDescription = "Cabecera del menú",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp) // Ajusta la altura según sea necesario
+                        .height(200.dp)
                 )
                 Text("Menu", style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(16.dp))
 
@@ -76,6 +70,7 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                 val menuItems = listOf(
                     DrawerMenuItem("Registro de Mascotas", icon = painterResource(id = R.drawable.registrosmascotas), route = "register_pet"),
                     DrawerMenuItem("Reporte de mascotas pedidas y encontradas", icon = painterResource(id = R.drawable.reporte), route = "pet_reports"),
+                    DrawerMenuItem("Adopcion de mascotas", icon = painterResource(id = R.drawable.adopcion), route = "adopt_pet"),
                     DrawerMenuItem("Consejos de cuidados y recursos veterinarios", icon = painterResource(id = R.drawable.saludveterinario), "pantalla_inicial")
 
                 )
@@ -128,8 +123,7 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                     contentColor = Color.White,
 
                 ){
-                    Row (
-                        modifier = Modifier.fillMaxWidth()
+                    Row (modifier = Modifier.fillMaxWidth()
                     ){
                         IconButton(onClick = {navController.navigate("inicio")},
                             modifier = Modifier.weight(1f)) {
@@ -158,16 +152,24 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                         .fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
-                    Text(text = "Home")
+                    Text(text = "Bienvenido a Paw Friends", style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.primary)
+                    Text(text = "¡Conecta y ayuda a mascotas en necesidad!", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurface)
+
+                    Button(
+                        onClick = {navController.navigate("adopt_pet")},
+                        modifier = Modifier.padding(top = 16.dp)
+                    ) {
+                        Text("Explorar Adopciones")
+                    }
                     //Aqui puedo agregar mas contenido a mi vista principal
-                }//Funcion 6
+                }//Funcion
                 FloatingActionButton(
                     onClick = {navController.navigate("servicios")},
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .padding(20.dp)
                 ) {
-                    Icon(imageVector = Icons.Default.TipsAndUpdates, contentDescription =  "Servicios")
+                    Icon(imageVector = Icons.Default.TipsAndUpdates, contentDescription =  "servicios")
                 }
             }
         }

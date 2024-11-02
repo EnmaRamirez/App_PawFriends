@@ -26,7 +26,7 @@ fun TabsView(innerPadding: PaddingValues  = PaddingValues(top = 40.dp),
              loginViewModel: LoginViewModel
 ){
     var selectedTab by remember { mutableStateOf(0) }
-    var tabs = listOf("Login", "Register")
+    var tabs = listOf("Acceso", "Registrate")
 
     Column (modifier = Modifier.padding(innerPadding)) {
         TabRow(selectedTabIndex = selectedTab,

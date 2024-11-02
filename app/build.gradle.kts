@@ -94,9 +94,13 @@ dependencies {
     implementation("androidx.compose.material:material-icons-core:1.3.0")
     implementation("androidx.compose.material:material-icons-extended:1.3.0")
     implementation ("androidx.compose.material3:material3:1.3.0")
+    implementation ("com.google.firebase:firebase-storage")
+    implementation ("com.google.firebase:firebase-messaging-ktx:23.0.7")
 
 
-   
-    
+
+
+
+
 
 }

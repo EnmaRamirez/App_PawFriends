@@ -1,12 +1,14 @@
 package com.enma.pawfriends.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.internal.composableLambda
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.enma.pawfriends.Adopcion.AdoptPetScreen
+import com.enma.pawfriends.Adopcion.AdoptionDetailsScreen
+import com.enma.pawfriends.Adopcion.AdoptionListScreen
+import com.enma.pawfriends.Adopcion.AdoptionRequestsScreen
 import com.enma.pawfriends.ReporteMascotas.PetReportRepository
-import com.enma.pawfriends.ReporteMascotas.PetReportViewModel
 import com.enma.pawfriends.ReporteMascotas.PetReportsScreen
 import com.enma.pawfriends.ReporteMascotas.ReportPetScreen
 import com.enma.pawfriends.view.login.BlanckView
@@ -15,7 +17,6 @@ import com.enma.pawfriends.view.login.TabsView
 import com.enma.pawfriends.view.notas.HomeView
 import com.enma.pawfriends.viewmodel.LoginViewModel
 import com.enma.pawfriends.viewmodel.NotesViewModel
-import androidx.navigation.NavController
 import com.enma.pawfriends.Elementos
 import com.enma.pawfriends.MenuInferior.ConsejosScreen
 import com.enma.pawfriends.MenuInferior.InicioScreen
@@ -31,7 +32,6 @@ import com.enma.pawfriends.cosejosdecuidado.PantallaInicial
 fun NavManager(loginViewModel: LoginViewModel,
                notesViewModel: NotesViewModel){
     val navController = rememberNavController()
-
     val petReportRepository = PetReportRepository()
 
     NavHost(navController = navController, startDestination = "elementos"){
@@ -50,20 +50,38 @@ fun NavManager(loginViewModel: LoginViewModel,
         composable("register_pet"){
             RegisterPetScreen(navController = navController)
         }
-        composable("pet_reports") { // Ruta para la pantalla de reporte de mascotas
+        composable("pet_reports") {
             ReportPetScreen(
                 onReportSubmitted = { /* Acción a realizar después de reportar */ },
                 repository = petReportRepository,
-                onViewReports = { navController.navigate("petReports") } // Navega a la pantalla de reportes
+                onViewReports = { navController.navigate("petReports") }
             )
         }
         composable("petReports") {
             PetReportsScreen(navController = navController, repository = petReportRepository)
         }
-        // Pantalla inicial Funcion7
+        //Funcion de Adopcion de mascota
+        composable("adopt_pet") {
+            AdoptPetScreen(navController = navController)
+        }
+        composable("adoption_requests") {
+            AdoptionRequestsScreen(navController = navController)
+        }
+        composable("adoption_list") {
+            AdoptionListScreen(navController = navController)
+        }
+        composable("offer_pet_adoption") {
+            AdoptPetScreen(navController)
+        }
+        composable("adoption_details/{requestId}") { backStackEntry ->
+            val requestId = backStackEntry.arguments?.getString("requestId") ?: ""
+            AdoptionDetailsScreen(navController = navController, requestId = requestId)
+        }
+
+        // Pantalla inicial Funcion consejos de cuidado y recursos veterianarios
         composable("pantalla_inicial") {
             PantallaInicial(
-                onCuidadoMascotasClick = { navController.navigate("categorias_animales") }, // Navegar a la nueva pantalla de categorías
+                onCuidadoMascotasClick = { navController.navigate("categorias_animales") },
                 onClinicasClick = { navController.navigate("clinicas_veterinarias") }
             )
         }
@@ -98,7 +116,6 @@ fun NavManager(loginViewModel: LoginViewModel,
         composable("servicios") {
             ServiciosScreen(navController)
         }
-
 
     }
 }
