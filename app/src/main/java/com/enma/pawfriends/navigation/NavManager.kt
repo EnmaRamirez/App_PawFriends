@@ -4,31 +4,30 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.enma.pawfriends.reportemascotas.PetReportRepository
+import com.enma.pawfriends.reportemascotas.PetReportsScreen
+import com.enma.pawfriends.reportemascotas.ReportPetScreen
 import com.enma.pawfriends.view.login.BlanckView
 import com.enma.pawfriends.view.login.TabsView
 import com.enma.pawfriends.view.notas.HomeView
 import com.enma.pawfriends.viewmodel.LoginViewModel
 import com.enma.pawfriends.viewmodel.NotesViewModel
+import com.enma.pawfriends.Elementos
 import com.enma.pawfriends.MenuInferior.ConsejosScreen
 import com.enma.pawfriends.MenuInferior.InicioScreen
 import com.enma.pawfriends.MenuInferior.MensajeriaScreen
 import com.enma.pawfriends.MenuInferior.ServiciosScreen
-import com.enma.pawfriends.pantallaprincipal.Elementos
-import com.enma.pawfriends.view.login.RegisterPetScreen
-import com.enma.pawfriends.reportemascotas.PetReportRepository
-import com.enma.pawfriends.reportemascotas.PetReportsScreen
-import com.enma.pawfriends.reportemascotas.ReportPetScreen
+import com.enma.pawfriends.RegisgtroMascotas.MascotasScreen
+import com.enma.pawfriends.petregister.RegisterPetScreen
 import com.enma.pawfriends.reportemascotas.cosejosdecuidado.AnimalesDomesticos
 import com.enma.pawfriends.reportemascotas.cosejosdecuidado.AnimalesGranja
 import com.enma.pawfriends.reportemascotas.cosejosdecuidado.CategoriasDeAnimales
 import com.enma.pawfriends.reportemascotas.cosejosdecuidado.ListaClinicasVeterinarias
 import com.enma.pawfriends.reportemascotas.cosejosdecuidado.PantallaInicial
-import com.enma.pawfriends.view.LeaderboardScreen
-import com.enma.pawfriends.view.UserProfileScreen
+import com.enma.pawfriends.services.FirestoreService
 
 @Composable
-fun NavManager(loginViewModel: LoginViewModel,
-               notesViewModel: NotesViewModel) {
+fun NavManager(loginViewModel: LoginViewModel, notesViewModel: NotesViewModel) {
     val navController = rememberNavController()
     val petReportRepository = PetReportRepository()
 
@@ -46,19 +45,18 @@ fun NavManager(loginViewModel: LoginViewModel,
             HomeView(navController = navController, viewModel = notesViewModel)
         }
         composable("register_pet") {
-            RegisterPetScreen(navController = navController)
+            RegisterPetScreen(firestoreService = FirestoreService()) // Asegúrate de inicializar el servicio aquí
         }
         composable("pet_reports") {
             ReportPetScreen(
                 onReportSubmitted = { /* Acción a realizar después de reportar */ },
                 repository = petReportRepository,
-                onViewReports = { navController.navigate("pet_reports_list") } // Navega a la pantalla de reportes
+                onViewReports = { navController.navigate("petReports") }
             )
         }
-        composable("pet_reports_list") {
-            PetReportsScreen(repository = petReportRepository)
+        composable("petReports") {
+            PetReportsScreen(navController = navController, repository = petReportRepository)
         }
-        // Pantalla inicial
         composable("pantalla_inicial") {
             PantallaInicial(
                 onCuidadoMascotasClick = { navController.navigate("categorias_animales") },
@@ -81,7 +79,6 @@ fun NavManager(loginViewModel: LoginViewModel,
         composable("clinicas_veterinarias") {
             ListaClinicasVeterinarias()
         }
-        // Barra inferior
         composable("inicio") {
             InicioScreen(navController)
         }
@@ -94,13 +91,10 @@ fun NavManager(loginViewModel: LoginViewModel,
         composable("servicios") {
             ServiciosScreen(navController)
         }
-        // Pantalla de Perfil de Usuario
-        composable("userProfile") {
-            UserProfileScreen(navController = navController)
+        composable("mascotas") { // Nueva ruta para la pantalla de Mascotas
+            MascotasScreen(firestoreService = FirestoreService()) // Inicializa FirestoreService aquí
         }
-        // Pantalla de Clasificación (Leaderboard)
-        composable("leaderboard") {
-            LeaderboardScreen(navController = navController)
-        }
+
     }
 }
+

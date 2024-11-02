@@ -1,4 +1,4 @@
-package com.enma.pawfriends.ReporteMascotas
+/*¡package com.enma.pawfriends.reportemascotas
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
@@ -7,24 +7,25 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
+
 @Composable
-fun MainScreen(navController: NavHostController = rememberNavController(), repository: PetReportRepository) {
+fun MainScreen(navController: NavHostController, repository: PetReportRepository) {
+    // Definimos el NavHost para la navegación
     NavHost(
         navController = navController,
-        startDestination = "report_pet"
+        startDestination = "report_pet" // Pantalla inicial
     ) {
-        // Pantalla para reportar una mascota
+        // Composable para la pantalla de reportar mascotas
         composable("report_pet") {
             ReportPetScreen(
-                onReportSubmitted = { /* Acción que sucederá al reportar una mascota */ },
-                repository = repository,
-                onViewReports = { navController.navigate("pet_reports") }
+                onReportSubmitted = { /* Acción al reportar */ },
+                onViewReports = { navController.navigate("pet_reports") },
+                repository = repository
             )
         }
-
-        // Pantalla que muestra los reportes de mascotas
+        // Composable para la pantalla que muestra los reportes de mascotas
         composable("pet_reports") {
-            PetReportsScreen(repository = repository) // No es necesario el navController aquí
+            PetReportsScreen(repository = repository)
         }
     }
 }
@@ -32,6 +33,8 @@ fun MainScreen(navController: NavHostController = rememberNavController(), repos
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
-    val repository = PetReportRepository() // Asegúrate de que el repositorio esté correctamente inicializado
-    MainScreen(repository = repository)
+    val repository = PetReportRepository()
+    val navController = rememberNavController() // Necesario para la preview
+    MainScreen(navController = navController, repository = repository)
 }
+*/

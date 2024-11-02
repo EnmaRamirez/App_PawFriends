@@ -1,5 +1,6 @@
 package com.enma.pawfriends.pantallaprincipal
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.enma.pawfriends.R
+import com.enma.pawfriends.viewmodel.NotesViewModel
 
 @Composable
 fun Elementos(navController: NavController

@@ -1,19 +1,17 @@
 package com.enma.pawfriends.model
 
+//Login
+
 data class User(
     val email: String,
     val userId: String,
-    val name: String,
-    var points: Int = 0,
-    var recognitions: List<Any> = mutableListOf() // Almacena reconocimientos como "Rescatador del Mes"
-) {
-    fun toMap(): MutableMap<String, Any> {
+    val name: String
+){
+    fun toMap(): MutableMap<String, Any>{
         return mutableMapOf(
             "email" to email,
-            "userId" to userId,
-            "name" to name,
-            "points" to points,
-            "recognitions" to recognitions
+            "UserId" to userId,
+            "name" to name
         )
     }
 }
