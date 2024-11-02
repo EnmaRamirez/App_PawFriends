@@ -38,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.enma.pawfriends.R
 import com.enma.pawfriends.navigation.NavManager
 import com.enma.pawfriends.services.FirestoreService
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
