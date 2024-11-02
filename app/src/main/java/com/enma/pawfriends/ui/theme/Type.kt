@@ -24,7 +24,7 @@ val Typography = Typography(
     bodyMedium = TextStyle(
         fontFamily = Kanit,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 48.sp
+        fontSize = 25.sp
 
     ),
     bodyLarge = TextStyle(
@@ -37,7 +37,7 @@ val Typography = Typography(
     bodySmall = TextStyle(
         fontFamily = Kanit,
         fontWeight = FontWeight.Normal,
-        fontSize = 20.sp
+        fontSize = 28.sp
     )
 
     /* Other default text styles to override
