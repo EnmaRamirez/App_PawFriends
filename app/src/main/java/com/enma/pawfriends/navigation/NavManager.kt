@@ -5,6 +5,7 @@ import androidx.compose.runtime.internal.composableLambda
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.enma.pawfriends.Elementos
 import com.enma.pawfriends.ReporteMascotas.PetReportRepository
 import com.enma.pawfriends.ReporteMascotas.ReportPetScreen
 import com.enma.pawfriends.view.login.BlanckView
@@ -13,18 +14,16 @@ import com.enma.pawfriends.view.login.TabsView
 import com.enma.pawfriends.view.notas.HomeView
 import com.enma.pawfriends.viewmodel.LoginViewModel
 import com.enma.pawfriends.viewmodel.NotesViewModel
-import androidx.navigation.NavController
-import com.enma.pawfriends.Elementos
 import com.enma.pawfriends.MenuInferior.ConsejosScreen
 import com.enma.pawfriends.MenuInferior.InicioScreen
 import com.enma.pawfriends.MenuInferior.MensajeriaScreen
 import com.enma.pawfriends.MenuInferior.ServiciosScreen
+import com.enma.pawfriends.ReporteMascotas.PetReportsScreen
 import com.enma.pawfriends.cosejosdecuidado.AnimalesDomesticos
 import com.enma.pawfriends.cosejosdecuidado.AnimalesGranja
 import com.enma.pawfriends.cosejosdecuidado.CategoriasDeAnimales
 import com.enma.pawfriends.cosejosdecuidado.ListaClinicasVeterinarias
 import com.enma.pawfriends.cosejosdecuidado.PantallaInicial
-import com.enma.pawfriends.reportemascotas.PetReportsScreen
 
 @Composable
 fun NavManager(loginViewModel: LoginViewModel,

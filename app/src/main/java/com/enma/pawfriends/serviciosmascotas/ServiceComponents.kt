@@ -26,7 +26,7 @@ fun ServiceItem(service: Service, onServiceRequested: (Service) -> Unit)
             Text("Tipo: ${service.type}")
             Text("Descripción: ${service.description}")
             Text("Precio: ${if (service.isFree) "Gratis" else "${service.price}"}")
-            Text("Ofrecido por: ${service.offeredBy}")
+            Text("Ofrecido por: ${service.ownerId}")
             Button(onClick = {
                 onServiceRequested(service)
                 showDialog = true

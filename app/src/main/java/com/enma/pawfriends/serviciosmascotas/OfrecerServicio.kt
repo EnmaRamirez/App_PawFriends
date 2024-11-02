@@ -84,7 +84,7 @@ fun OfferServiceScreen(onServiceAdded: () -> Unit) {
                     type = type,
                     price = if (isFree) null else price.toDoubleOrNull(),
                     isFree = isFree,
-                    offeredBy = "NombreUsuario" // Aquí podrías agregar el nombre del usuario actual
+                    ownerId = "" // Aquí podrías agregar el nombre del usuario actual
                 )
                 ServiceRepository.addService(service)
                 onServiceAdded()

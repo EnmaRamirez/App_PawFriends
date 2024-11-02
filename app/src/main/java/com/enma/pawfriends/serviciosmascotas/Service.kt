@@ -6,5 +6,5 @@ data class Service(
     val type: String = "",
     val price: Double? = null,
     val isFree: Boolean = false,
-    val offeredBy: String = ""
+    val ownerId: String = ""
 )

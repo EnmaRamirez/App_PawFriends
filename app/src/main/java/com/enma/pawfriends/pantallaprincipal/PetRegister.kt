@@ -23,7 +23,7 @@ import com.enma.pawfriends.R
 import com.enma.pawfriends.viewmodel.NotesViewModel
 
 @Composable
-fun Elementos(navController: NavController
+fun Elementoss(navController: NavController
 ) {
     val mContext = LocalContext.current
     Column(
