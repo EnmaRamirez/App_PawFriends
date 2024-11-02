@@ -24,6 +24,9 @@ import com.enma.pawfriends.cosejosdecuidado.AnimalesGranja
 import com.enma.pawfriends.cosejosdecuidado.CategoriasDeAnimales
 import com.enma.pawfriends.cosejosdecuidado.ListaClinicasVeterinarias
 import com.enma.pawfriends.cosejosdecuidado.PantallaInicial
+import com.enma.pawfriends.serviciosmascotas.GetServiceScreen
+import com.enma.pawfriends.serviciosmascotas.OfferServiceScreen
+import com.enma.pawfriends.serviciosmascotas.notifyServiceAccepted
 
 @Composable
 fun NavManager(loginViewModel: LoginViewModel,
@@ -97,7 +100,20 @@ fun NavManager(loginViewModel: LoginViewModel,
             ServiciosScreen(navController)
         }
 
-
+        composable("pantallaInicial") {
+            com.enma.pawfriends.serviciosmascotas.PantallaInicial(
+                onOfrecerServicioClick = { navController.navigate("offerService") },
+                onObtenerServicioClick = { navController.navigate("getService") }
+            )
+        }
+        composable("offerService") {
+            OfferServiceScreen { navController.navigate("getService") }
+        }
+        composable("getService") {
+            GetServiceScreen { service ->
+                notifyServiceAccepted(service, "NombreUsuarioActual")
+            }
+        }
     }
 }
 

@@ -76,7 +76,8 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                 val menuItems = listOf(
                     DrawerMenuItem("Registro de Mascotas", icon = painterResource(id = R.drawable.registrosmascotas), route = "register_pet"),
                     DrawerMenuItem("Reporte de mascotas pedidas y encontradas", icon = painterResource(id = R.drawable.reporte), route = "pet_reports"),
-                    DrawerMenuItem("Consejos de cuidados y recursos veterinarios", icon = painterResource(id = R.drawable.saludveterinario), "pantalla_inicial")
+                    DrawerMenuItem("Consejos de cuidados y recursos veterinarios", icon = painterResource(id = R.drawable.saludveterinario), "pantalla_inicial"),
+                    DrawerMenuItem("Servicios de mascotas", icon = painterResource(id = R.drawable.registrosmascotas), route = "pantallaInicial")
 
                 )
 
