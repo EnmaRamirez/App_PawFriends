@@ -1,8 +1,8 @@
 plugins {
-    //id("com.android.application")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
+   /* apply plugin: ("kotlin-kapt")*/
 }
 
 android {
@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.enma.pawfriends"
-        minSdk = 25
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -52,58 +52,40 @@ android {
 }
 
 dependencies {
-
-    implementation(kotlin("script-runtime"))
-    val nav_version = "2.8.0"
-    implementation("androidx.navigation:navigation-compose:$nav_version")
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.firebase.firestore.ktx)
-    implementation(libs.firebase.auth.ktx)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-
-
-    implementation ("androidx.core:core-ktx:1.13.1")
-    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("com.airbnb.android:lottie:4.2.1")
-    implementation ("com.google.firebase:firebase-messaging")
-    implementation ("androidx.navigation:navigation-compose:2.7.3")
-    implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
-
-
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-firestore-ktx")
-    implementation("com.google.firebase:firebase-auth-ktx")
-
-//NAVIGATION FIREBASE
-    implementation("androidx.navigation:navigation-compose:2.7.0")
-    implementation("androidx.compose.ui:ui:1.5.0")
-    implementation("androidx.compose.material3:material3:1.1.0")
-
-    //Dependencias DE COMPOSE
-    implementation(platform(libs.androidx.compose.bom))
+    // AndroidX and Jetpack Compose dependencies
+    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation(platform("androidx.compose:compose-bom:2024.03.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material:material-icons-core:1.3.0")
-    implementation("androidx.compose.material:material-icons-extended:1.3.0")
-    implementation ("androidx.compose.material3:material3:1.3.0")
+    implementation("androidx.compose.material3:material3:1.1.0")
+    implementation("androidx.navigation:navigation-compose:2.7.3")
 
+    // Firebase dependencies (using BOM)
+    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-database-ktx")
+    implementation("com.google.firebase:firebase-messaging")
 
-   
+    // Lottie for animations
+    implementation("com.airbnb.android:lottie:4.2.1")
+    implementation(libs.firebase.vertexai)
 
+    // Testing dependencies
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.03.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // chat
+    implementation ("androidx.room:room-runtime:2.4.3")
+    implementation ("androidx.room:room-ktx:2.4.3")
+   /* kapt ("androidx.room:room-compiler:2.4.3")*/
 }
+
