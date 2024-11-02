@@ -17,13 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.enma.pawfriends.repuesto.viewmodel.LoginViewModel
 
 
 @Composable
-fun TabsView(innerPadding: PaddingValues  = PaddingValues(top = 40.dp),
-             navController: NavController,
-             loginViewModel: LoginViewModel
+fun TabsView(
+    innerPadding: PaddingValues  = PaddingValues(top = 40.dp),
+    navController: NavController,
+    loginViewModel: com.enma.pawfriends.chat.viewmodel.LoginViewModel
 ){
     var selectedTab by remember { mutableStateOf(0) }
     var tabs = listOf("Login", "Register")

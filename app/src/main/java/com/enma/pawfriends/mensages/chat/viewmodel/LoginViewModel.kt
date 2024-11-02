@@ -1,4 +1,4 @@
-package com.enma.pawfriends.chat.viewmodel
+/*package com.enma.pawfriends.chat.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.getValue
@@ -91,4 +91,4 @@ class LoginViewModel: ViewModel(){
         showAlert = false
     }
 
-}
+}*/

@@ -1,4 +1,4 @@
-package com.enma.pawfriends.Resenas
+package com.enma.pawfriends.Reseñas
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth

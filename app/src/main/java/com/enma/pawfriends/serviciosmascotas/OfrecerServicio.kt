@@ -24,7 +24,10 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 
 @Composable
-fun OfferServiceScreen(onServiceAdded: () -> Unit) {
+fun OfferServiceScreen(
+    onServiceAdded: () -> Unit,
+    navController: () -> Unit
+) {
     var description by remember { mutableStateOf("") }
     var type by remember { mutableStateOf("") }
     var price by remember { mutableStateOf("") }

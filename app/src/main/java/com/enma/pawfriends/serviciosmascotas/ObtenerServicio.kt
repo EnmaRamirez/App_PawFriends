@@ -15,7 +15,10 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
 @Composable
-fun GetServiceScreen(onServiceRequested: (Service) -> Unit) {
+fun GetServiceScreen(
+    onServiceRequested: (Service) -> Unit,
+    navController: (Any) -> Unit
+) {
     val scope = rememberCoroutineScope()
     var services by remember { mutableStateOf(listOf<Service>()) }
 

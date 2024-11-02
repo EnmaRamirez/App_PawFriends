@@ -1,4 +1,4 @@
-package com.enma.pawfriends.ReporteMascotas
+/*package com.enma.pawfriends.ReporteMascotas
 //Llamado al reporte de mascotas
 
 data class PetReport(
@@ -8,5 +8,5 @@ data class PetReport(
     val description: String,
     val location: String,
     val date: String, // Fecha del reporte
-)
+)*/
 

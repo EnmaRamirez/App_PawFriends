@@ -1,4 +1,4 @@
-package com.enma.pawfriends.Resenas
+package com.enma.pawfriends
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,7 +15,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.firestore.FirebaseFirestore
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReviewAndRatingScreen(db: FirebaseFirestore) {
     var rating by rememberSaveable { mutableStateOf(0) }
@@ -130,6 +129,5 @@ fun ReviewAndRatingScreen(db: FirebaseFirestore) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        }
     }
-
+}

@@ -17,11 +17,11 @@ fun AppNavHost() {
             )
         }
         composable("offerService") {
-            OfferServiceScreen { navController.navigate("getService") }
+            //OfferServiceScreen { navController.navigate("getService") }
         }
         composable("getService") {
-            GetServiceScreen { service ->
-                notifyServiceAccepted(service, "NombreUsuarioActual")
+          //  GetServiceScreen { service ->
+               // notifyServiceAccepted(service, "NombreUsuarioActual")
             }
         }
     }

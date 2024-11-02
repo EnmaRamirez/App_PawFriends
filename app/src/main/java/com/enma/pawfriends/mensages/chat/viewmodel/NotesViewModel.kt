@@ -1,4 +1,4 @@
-package com.enma.pawfriends.chat.viewmodel
+/*package com.enma.pawfriends.chat.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.Firebase
@@ -11,4 +11,4 @@ class NotesViewModel: ViewModel(){
     fun signOut(){
         auth.signOut()
     }
-}
+}*/
