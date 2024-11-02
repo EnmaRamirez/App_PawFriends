@@ -35,8 +35,16 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val intent = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
+
+        // Ajustar los flags del PendingIntent según la versión de Android
+        val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        } else {
+            PendingIntent.FLAG_UPDATE_CURRENT
+        }
+
         val pendingIntent: PendingIntent = PendingIntent.getActivity(
-            this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            this, 0, intent, pendingIntentFlags
         )
 
         val builder = NotificationCompat.Builder(this, channelId)
@@ -46,6 +54,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelName = "Paw Friends Notificaciones"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
@@ -53,6 +62,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val notificationManager: NotificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
+        }
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(System.currentTimeMillis().toInt(), builder.build())
         }
     }
 }

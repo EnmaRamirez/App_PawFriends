@@ -1,10 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permisos necesarios -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
+        android:name=".PawFriendsApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,12 +21,29 @@
         android:theme="@style/Theme.PawFriends"
         tools:targetApi="31">
 
+        <!-- Firebase Messaging Service -->
+        <service
+            android:name=".notifications.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- Definición de ReviewActivity -->
+        <activity
+            android:name=".ReviewActivity"
+            android:exported="true"
+            android:theme="@style/Theme.PawFriends" />
+
+        <!-- Definición de PantallaPrincipalActivity -->
         <activity
             android:name=".pantallaprincipal.PantallaPrincipalActivity"
             android:exported="true"
             android:label="@string/title_activity_pantalla_principal"
             android:theme="@style/Theme.PawFriends" />
 
+        <!-- MainActivity: Actividad principal -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -32,6 +55,7 @@
             </intent-filter>
         </activity>
 
+</manifest>
           <activity
             android:name=".MessagingActivity"
             android:exported="true"

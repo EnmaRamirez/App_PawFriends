@@ -12,12 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun ReportPetScreen(
@@ -32,6 +32,7 @@ fun ReportPetScreen(
     var lastSeenDate by remember { mutableStateOf("") }
     var message by remember { mutableStateOf("") } // Estado para el mensaje
     val coroutineScope = rememberCoroutineScope()
+    val auth = FirebaseAuth.getInstance() // Obtener instancia de FirebaseAuth
 
     Column(
         modifier = Modifier
@@ -43,7 +44,7 @@ fun ReportPetScreen(
         Text(
             text = "REPORTE DE MASCOTAS DESAPARECIDAS",
             style = TextStyle(
-                fontSize = 15.sp,
+                fontSize = 18.sp,
                 color = Color.Black,
                 fontWeight = FontWeight.Bold
             ),
@@ -57,7 +58,10 @@ fun ReportPetScreen(
         BasicTextField(
             value = petName,
             onValueChange = { petName = it },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
+                .background(Color.LightGray),
             textStyle = TextStyle(color = Color.Black),
             decorationBox = { innerTextField ->
                 if (petName.isEmpty()) {
@@ -67,13 +71,14 @@ fun ReportPetScreen(
             }
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
         // Campo para la descripción de la mascota
         BasicTextField(
             value = petDescription,
             onValueChange = { petDescription = it },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
+                .background(Color.LightGray),
             textStyle = TextStyle(color = Color.Black),
             decorationBox = { innerTextField ->
                 if (petDescription.isEmpty()) {
@@ -83,13 +88,14 @@ fun ReportPetScreen(
             }
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
         // Campo para la ubicación
         BasicTextField(
             value = petLocation,
             onValueChange = { petLocation = it },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
+                .background(Color.LightGray),
             textStyle = TextStyle(color = Color.Black),
             decorationBox = { innerTextField ->
                 if (petLocation.isEmpty()) {
@@ -99,13 +105,14 @@ fun ReportPetScreen(
             }
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
         // Campo para la última fecha vista
         BasicTextField(
             value = lastSeenDate,
-            onValueChange = { lastSeenDate = it },
-            modifier = Modifier.fillMaxWidth(),
+            onValueChange = { lastSeenDate = it.trim() },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
+                .background(Color.LightGray),
             textStyle = TextStyle(color = Color.Black),
             decorationBox = { innerTextField ->
                 if (lastSeenDate.isEmpty()) {
@@ -115,29 +122,28 @@ fun ReportPetScreen(
             }
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
-
         // Botón para reportar la mascota
         Button(
             onClick = {
                 if (petName.isEmpty() || petDescription.isEmpty() || petLocation.isEmpty() || lastSeenDate.isEmpty()) {
-                    message = "Por favor, completa todos los campos." // Mensaje de error
+                    message = "Por favor, completa todos los campos."
                 } else {
                     coroutineScope.launch {
-                        // Validación y creación de PetReport
                         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                         try {
                             dateFormat.parse(lastSeenDate) // Validar la fecha
+                            val userId = auth.currentUser?.uid ?: "usuario_placeholder"
                             val petReport = PetReport(
                                 id = System.currentTimeMillis().toString(),
                                 name = petName,
                                 type = petType,
                                 description = petDescription,
                                 location = petLocation,
-                                date = lastSeenDate // Asegúrate de que date sea String
+                                date = lastSeenDate,
+                                ownerId = userId // Aquí se debe reemplazar con el ID del usuario autenticado
                             )
                             repository.reportPet(petReport)
-                            message = "Mascota reportada exitosamente." // Mensaje de éxito
+                            message = "Mascota reportada exitosamente."
                             onReportSubmitted()
                         } catch (e: Exception) {
                             message = "Fecha no válida. Usa el formato dd/mm/yyyy."
@@ -145,62 +151,34 @@ fun ReportPetScreen(
                     }
                 }
             },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFA500))
         ) {
             Text("Reportar mascota", color = Color.White)
         }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Botón para limpiar los campos
-        Button(
-            onClick = {
-                petName = ""
-                petDescription = ""
-                petLocation = ""
-                lastSeenDate = ""
-                message = "" // Limpiar el mensaje al limpiar los campos
-            },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFA500))
-        ) {
-            Text("Limpiar", color = Color.White)
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
 
         // Botón para ver reportes
         Button(
             onClick = {
                 onViewReports()
             },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFA500))
         ) {
             Text("Ver reportes", color = Color.White)
         }
 
         // Mostrar el mensaje
-        Spacer(modifier = Modifier.height(8.dp))
         if (message.isNotEmpty()) {
             Text(
                 text = message,
-                color = if (message.startsWith("Por favor")) Color.Red else Color.Green,
+                color = if (message.startsWith("Por favor") || message.startsWith("Fecha")) Color.Red else Color.Green,
                 modifier = Modifier.padding(8.dp)
             )
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun ReportPetScreenPreview() {
-    val repository = PetReportRepository() // Simulación de un repositorio
-    ReportPetScreen(
-        onReportSubmitted = { /* acción de ejemplo */ },
-        repository = repository,
-        onViewReports = { /* acción de ejemplo */ }
-    )
-}
-

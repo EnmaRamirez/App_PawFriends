@@ -1,6 +1,5 @@
 package com.enma.pawfriends.pantallaprincipal
 
-import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
