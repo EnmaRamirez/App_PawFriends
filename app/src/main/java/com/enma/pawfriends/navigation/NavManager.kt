@@ -13,8 +13,6 @@ import com.enma.pawfriends.view.login.RegisterPetScreen
 import com.enma.pawfriends.Elementos
 import com.enma.pawfriends.view.login.TabsView
 import com.enma.pawfriends.view.notas.HomeView
-import com.enma.pawfriends.viewmodel.LoginViewModel
-import com.enma.pawfriends.viewmodel.NotesViewModel
 import com.enma.pawfriends.MenuInferior.ConsejosScreen
 import com.enma.pawfriends.MenuInferior.InicioScreen
 import com.enma.pawfriends.MenuInferior.MensajeriaScreen
@@ -26,10 +24,12 @@ import com.enma.pawfriends.cosejosdecuidado.AnimalesGranja
 import com.enma.pawfriends.cosejosdecuidado.CategoriasDeAnimales
 import com.enma.pawfriends.cosejosdecuidado.ListaClinicasVeterinarias
 import com.enma.pawfriends.cosejosdecuidado.PantallaInicial
-import com.enma.pawfriends.view.login.TabsView
-import com.enma.pawfriends.view.notas.HomeView
-import com.enma.pawfriends.viewmodel.LoginViewModel
-import com.enma.pawfriends.viewmodel.NotesViewModel
+import com.enma.pawfriends.repuesto.viewmodel.LoginViewModel
+import com.enma.pawfriends.repuesto.viewmodel.NotesViewModel
+import com.enma.pawfriends.serviciosmascotas.GetServiceScreen
+import com.enma.pawfriends.serviciosmascotas.OfferServiceScreen
+import com.enma.pawfriends.serviciosmascotas.notifyServiceAccepted
+
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
@@ -42,7 +42,12 @@ fun NavManager(loginViewModel: LoginViewModel, notesViewModel: NotesViewModel) {
     NavHost(navController = navController, startDestination = "elementos") {
         composable("elementos") { Elementos(navController) }
         composable("black") { BlanckView(navController = navController) }
-        composable("login") { TabsView(navController = navController, loginViewModel = loginViewModel) }
+        composable("login") {
+            TabsView(
+                navController = navController,
+                loginViewModel = loginViewModel
+            )
+        }
         composable("home") { HomeView(navController = navController, viewModel = notesViewModel) }
         composable("register_pet") { RegisterPetScreen(navController = navController) }
         composable("pet_reports") {
@@ -52,7 +57,12 @@ fun NavManager(loginViewModel: LoginViewModel, notesViewModel: NotesViewModel) {
                 onViewReports = { navController.navigate("petReports") }
             )
         }
-        composable("petReports") { PetReportsScreen(navController = navController, repository = petReportRepository) }
+        composable("petReports") {
+            PetReportsScreen(
+                navController = navController,
+                repository = petReportRepository
+            )
+        }
         composable("pantalla_inicial") {
             PantallaInicial(
                 onCuidadoMascotasClick = { navController.navigate("categorias_animales") },
@@ -75,15 +85,27 @@ fun NavManager(loginViewModel: LoginViewModel, notesViewModel: NotesViewModel) {
             // Pasa el UID como parámetro a la pantalla de mensajería
             if (uid != null) {
                 MessagingScreen(navController = navController, uid = uid)
-            }
-
-            else {
+            } else {
 
 
 // Aquí puedes manejar el caso en que el usuario no esté autenticado
             }
         }
-        composable("servicios") { ServiciosScreen(navController) }
-    }
+        composable("pantallaInicial") {
+            com.enma.pawfriends.serviciosmascotas.PantallaInicial(
+                onOfrecerServicioClick = { navController.navigate("offerService") },
+                onObtenerServicioClick = { navController.navigate("getService") }
+            )
+        }
+        composable("offerService") {
+            OfferServiceScreen ( navController )
+        }
+        composable("getService") {
+            GetServiceScreen { service ->
+                notifyServiceAccepted(service, "NombreUsuarioActual")
+            }
 
+        }
+
+    }
 }

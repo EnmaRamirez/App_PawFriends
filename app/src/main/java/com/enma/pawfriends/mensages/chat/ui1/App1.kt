@@ -12,7 +12,7 @@ fun App(navController: NavController) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "messaging") {
         composable(route = "messaging") {
-            MessagingScreen(navController)
+         //   MessagingScreen(navController)
         }
     }
 }

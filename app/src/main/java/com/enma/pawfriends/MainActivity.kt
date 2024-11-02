@@ -40,10 +40,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.enma.pawfriends.R
 import com.enma.pawfriends.navigation.NavManager
+import com.enma.pawfriends.repuesto.viewmodel.LoginViewModel
+import com.enma.pawfriends.repuesto.viewmodel.NotesViewModel
 import com.enma.pawfriends.services.FirestoreService
 import com.enma.pawfriends.ui.theme.PawFriendsTheme
-import com.enma.pawfriends.viewmodel.LoginViewModel
-import com.enma.pawfriends.viewmodel.NotesViewModel
+
 
 
 class MainActivity : ComponentActivity() {

@@ -20,7 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.enma.pawfriends.R
 import com.enma.pawfriends.model.DrawerMenuItem
-import com.enma.pawfriends.viewmodel.NotesViewModel
+import com.enma.pawfriends.repuesto.viewmodel.NotesViewModel
+
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,7 +47,8 @@ fun HomeView(navController: NavController, viewModel: NotesViewModel) {
                 val menuItems = listOf(
                     DrawerMenuItem("Registro de Mascotas", icon = painterResource(id = R.drawable.registrosmascotas), route = "register_pet"),
                     DrawerMenuItem("Reporte de mascotas perdidas y encontradas", icon = painterResource(id = R.drawable.reporte), route = "pet_reports"),
-                    DrawerMenuItem("Consejos de cuidados y recursos veterinarios", icon = painterResource(id = R.drawable.saludveterinario), route = "pantalla_inicial")
+                    DrawerMenuItem("Consejos de cuidados y recursos veterinarios", icon = painterResource(id = R.drawable.saludveterinario), route = "pantalla_inicial"),
+                    DrawerMenuItem("servicios de Mascotas", icon = painterResource(id = R.drawable.registrosmascotas), route = "StartScreen")
                 )
 
                 menuItems.forEach { item ->
