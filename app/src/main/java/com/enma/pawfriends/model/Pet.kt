@@ -7,7 +7,11 @@ data class Pet (
     val age: Int = 0,
     val health: String = "",
     val carnet: Int = 0,
-    val ownerId: String = ""
+    val ownerId: String = "",
+    val photos: List<String> = listOf(),
+    val videos: List<String> = listOf(),
+    val imageUrl: String
+
 )
 
 data class PetAd(

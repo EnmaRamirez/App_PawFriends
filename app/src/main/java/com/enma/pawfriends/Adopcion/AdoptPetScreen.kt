@@ -22,7 +22,6 @@ import com.enma.pawfriends.model.PetAd
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
-//Adopcion
 
 @Composable
 fun AdoptPetScreen(navController: NavController) {
@@ -36,15 +35,18 @@ fun AdoptPetScreen(navController: NavController) {
     val activity = context as? Activity
 
     // Verificación de permisos para acceder a la galería
-    val permissionGranted = remember {
-        ContextCompat.checkSelfPermission(
-            context, Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-    if (!permissionGranted) {
-        ActivityCompat.requestPermissions(
-            activity!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1
-        )
+    LaunchedEffect(Unit) {
+        if (activity != null && ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                1
+            )
+        }
     }
 
     // Lanzador para seleccionar una imagen de la galería
@@ -52,7 +54,7 @@ fun AdoptPetScreen(navController: NavController) {
         contract = ActivityResultContracts.GetContent(),
         onResult = { uri: Uri? ->
             if (uri != null) {
-                photoUri = uri // Guarda la URI seleccionada
+                photoUri = uri
             } else {
                 Toast.makeText(context, "No se seleccionó ninguna imagen", Toast.LENGTH_SHORT).show()
             }
@@ -61,41 +63,59 @@ fun AdoptPetScreen(navController: NavController) {
 
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize().padding(16.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
     ) {
         Column(
+            modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            TextField(
+            Text(
+                text = "Ofrecer Mascota en Adopción",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.primary
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            OutlinedTextField(
                 value = petId,
                 onValueChange = { petId = it },
                 label = { Text("Identificación de Mascota") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
-            TextField(
+
+            OutlinedTextField(
                 value = ownerId,
                 onValueChange = { ownerId = it },
                 label = { Text("Identificación de Propietario") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
-            TextField(
+
+            OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
                 label = { Text("Descripción") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
-            TextField(
+
+            OutlinedTextField(
                 value = medicalHistory,
                 onValueChange = { medicalHistory = it },
                 label = { Text("Historial Médico") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
 
-            Button(onClick = { launcher.launch("image/*") }) {
+            Button(
+                onClick = { launcher.launch("image/*") },
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Text("Seleccionar Foto")
             }
 
+            // Mostrar el indicador de carga
             if (isLoading) {
                 CircularProgressIndicator(modifier = Modifier.padding(8.dp))
             }
@@ -110,7 +130,8 @@ fun AdoptPetScreen(navController: NavController) {
                                 petAd,
                                 onSuccess = {
                                     isLoading = false
-                                    navController.navigate("adoption_requests")
+                                    Toast.makeText(context, "Mascota ofrecida en adopción", Toast.LENGTH_SHORT).show()
+                                    navController.navigate("adoption_requests") // Navegar a la pantalla de solicitudes
                                 },
                                 onFailure = { exception ->
                                     isLoading = false
@@ -122,9 +143,10 @@ fun AdoptPetScreen(navController: NavController) {
                         Toast.makeText(context, "Por favor selecciona una foto", Toast.LENGTH_SHORT).show()
                     }
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
             ) {
-                Text("Ofrecer mascota en adopción")
+                Text("Ofrecer mascota en adopción", color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     }

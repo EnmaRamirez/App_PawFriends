@@ -96,6 +96,12 @@ dependencies {
     implementation ("androidx.compose.material3:material3:1.3.0")
     implementation ("com.google.firebase:firebase-storage")
     implementation ("com.google.firebase:firebase-messaging-ktx:23.0.7")
+    implementation ("androidx.compose.material3:material3:1.1.0") 
+    implementation ("androidx.compose.ui:ui:1.5.0")
+    implementation ("com.google.firebase:firebase-storage-ktx:20.0.0")
+    implementation("io.coil-kt:coil-compose:2.1.0")
+ 
+
 
 
 
